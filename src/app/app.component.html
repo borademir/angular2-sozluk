@@ -1,48 +1,30 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">WebSiteName</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Eksi Sözlük</a></li>
-      <li><a href="#">Page 2</a></li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-    </ul>
-  </div>
-</nav> 
-
 <section class="todoapp">
   <header class="header">
     <h1>Todos</h1>
     <input class="form-control" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newTodo.title" (keyup.enter)="addTodo()">
   </header>
   <section class="main" *ngIf="todos.length > 0">
- <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Select</th>
-        <th>Todo</th>
-        <th>Email</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let todo of todos" [class.completed]="todo.complete">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Select</th>
+          <th>Todo</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let todo of todos" [class.completed]="todo.complete">
+        <tr>
+          <td><input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete"></td>
+          <td>{{todo.title}}</td>
+          <td><button class="btn btn-primary" (click)="removeTodo(todo)">Remove</button></td>
+        </tr>
 
-      <tr>
-        <td><input class="toggle" type="checkbox" (click)="toggleTodoComplete(todo)" [checked]="todo.complete"></td>
-        <td>{{todo.title}}</td>
-        <td><button class="btn btn-primary" (click)="removeTodo(todo)">Remove</button></td>
-      </tr>
-     
-    </tbody>
-  </table>
+      </tbody>
+    </table>
 
   </section>
   <footer class="footer" *ngIf="todos.length > 0">
     <span class="todo-count"><strong>{{todos.length}}</strong> {{todos.length == 1 ? 'item' : 'items'}} left</span>
   </footer>
-  
+
 </section>

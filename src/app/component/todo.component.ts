@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { Todo } from './todo';
-import { TodoDataService } from './todo-data.service';
+import { Todo } from '../model/todo';
+import { TodoDataService } from '../service/todo-data.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'todo-list',
+  templateUrl: '../view/todo.component.html',
   providers: [TodoDataService]
 })
-export class AppComponent {
+export class TodoComponent {
   title = 'app works!';
 
   newTodo: Todo = new Todo();

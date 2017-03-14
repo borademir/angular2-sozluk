@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { TodoDataService } from './todo-data.service';
+import { TodoDataService } from '../service/todo-data.service';
 
 describe('TodoDataService', () => {
   beforeEach(() => {
@@ -13,3 +13,4 @@ describe('TodoDataService', () => {
     expect(service).toBeTruthy();
   }));
 });
+ 

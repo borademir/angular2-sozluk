@@ -15,22 +15,29 @@ export class EksiMenuBarComponent {
 
   channels: Object[];
   errorMessage: String;
-  isDataAvailable:boolean = false;
+  isDataAvailable: boolean = false;
 
   constructor(private eksiciService: EksiciService) {
   }
 
-  ngOnInit(): void {
-    console.log('init calisti');
+  loadChannels() {
+    console.log('loading channels');
     this.eksiciService.getChannels().subscribe(
-       data  => this.channels = data,
-       error => this.errorMessage = <any>error,
-       function() { 
+      data => this.channels = data,
+      error => this.errorMessage = <any>error,
+      () => {
+        this.isDataAvailable = true;
+        console.log(this.isDataAvailable + " info..");
+        console.log("the subscription is completed " + this.channels[0]+ " channels loaded..");
+      }
 
-         console.log("the subscription is completed");
-         this.isDataAvailable = true;
-        }
     );
+  }
+
+  ngOnInit(): void {
+
+    this.loadChannels();
+
   }
 
 }

@@ -1,6 +1,7 @@
 import { Injectable }              from '@angular/core';
 import { Http, Response }          from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable }              from 'rxjs/Observable';
+import { Channel }                 from '../model/channel';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -13,8 +14,9 @@ export class EksiciService {
 
   getChannels (): Observable<Object[]> {
     console.log('get channels baslar');
-    let resp: Observable<Object[]> = this.http.get(this.apiBaseUrl + 'channels')
-                    .map(this.extractData)
+    let resp: Observable<Channel[]> = this.http.get(this.apiBaseUrl + 'channels')
+                   // .map(this.extractData)
+                    .map((response: Response) => <Channel[]>response.json())
                     .catch(this.handleError);
     console.log('get channels biter');
     return resp;
@@ -22,7 +24,7 @@ export class EksiciService {
   private extractData(res: Response) {
     let body = res.json();
     console.log(body);
-    return body.data || { };
+    return body.data ;
   }
   private handleError (error: Response | any) {
     // In a real world app, you might use a remote logging infrastructure

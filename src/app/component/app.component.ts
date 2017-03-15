@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
 import { Todo } from '../model/todo';
 import { TodoDataService } from '../service/todo-data.service';
+
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,21 @@ import { TodoDataService } from '../service/todo-data.service';
   styleUrls: [ '../view/style/app.component.css'],
   providers: [TodoDataService]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
+
+  errorMessage: string;
+
+    ngOnInit(): void {
+     console.log('init calisti');
+    }
+
   title = 'app works!';
 
   newTodo: Todo = new Todo();
 
-  constructor(private todoDataService: TodoDataService){
-
-  }
+  constructor(
+    private todoDataService : TodoDataService
+  ){ }
 
   addTodo(){
     this.todoDataService.addTodo(this.newTodo);

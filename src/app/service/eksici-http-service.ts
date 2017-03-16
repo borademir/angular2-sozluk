@@ -34,9 +34,9 @@ export class EksiciService {
     return resp;
   }
 
-  getTopicEntries (pTopic: Topic): Observable<Topic> {
+  getTopicEntries (pHref: String): Observable<Topic> {
     console.log('get topic entries baslar');
-    let resp: Observable<Topic> = this.http.get(this.apiBaseUrl + 'topics/entries?topicsHref=' + pTopic.href)
+    let resp: Observable<Topic> = this.http.get(this.apiBaseUrl + 'topics/entries?topicsHref=' + pHref)
                     .map((response: Response) => <Topic>response.json())
                     .catch(this.handleError);
     console.log('get topic entries biter');

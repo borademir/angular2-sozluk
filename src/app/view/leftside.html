@@ -7,7 +7,7 @@
 
                     <div class="well">{{eksiciSharedService.sessionbean.topicsTypeDescription}}</div>
                     <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.topicsCurrentPage.contentList">
-                        <a href="#" class="list-group-item" (click)="openTopicEntries(topic)">
+                        <a href="#" class="list-group-item" (click)="openTopicEntries(topic.href)">
                     {{topic.topicText}}
                     <span class="badge">{{topic.relatedEntryCount}}</span>
                 </a>
@@ -22,6 +22,10 @@
 
                 <div class="page-header">
                     <h2>{{eksiciSharedService.sessionbean.currentTopic.topicText}}</h2>
+                    <ul class="pager">
+                        <li><a href="#">Previous</a></li>
+                        <li><a href="#" (click)="openTopicEntries(eksiciSharedService.sessionbean.currentTopic.nextPageHref)" title="">{{eksiciSharedService.sessionbean.currentTopic.nextPageHref}}</a></li>
+                    </ul>
                 </div>
 
 
@@ -37,7 +41,7 @@
                         <article class="panel panel-primary">
 
                             <div class="panel-heading icon">
-                                <i class="glyphicon glyphicon-sunglasses"></i>
+                                <i class="glyphicon glyphicon-pencil"></i>
                             </div>
 
                             <div class="panel-heading" style="display: block;">
@@ -45,7 +49,7 @@
                                     <i class="glyphicon glyphicon-user"></i>
                                     <span>{{entry.suser.entryAuthor}}</span>
                                 </a>
-                                
+
                             </div>
 
                             <div class="panel-body" [innerHtml]="entry.entryHtml">

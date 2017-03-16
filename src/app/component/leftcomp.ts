@@ -21,9 +21,9 @@ export class EksiLeftsideComponent {
     this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
   }
 
-  openTopicEntries(pTopic: Topic) {
-    console.log(pTopic.href + ' clicked..');
-    this.eksiciSharedService.loadTopicEntriesAsync(pTopic);
+  openTopicEntries(pHref: String) {
+    console.log(pHref + ' clicked..');
+    this.eksiciSharedService.loadTopicEntriesAsync(pHref);
   }
 
 

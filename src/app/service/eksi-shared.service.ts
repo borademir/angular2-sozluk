@@ -32,9 +32,9 @@ export class EksiSharedService {
  * 
  * http://www.eksici.com/api/v1/topics/entries?topicsHref=
  */
-  loadTopicEntriesAsync(pTopic: Topic) {
+  loadTopicEntriesAsync(pHref: String) {
     console.log('loading topic entries');
-    this.eksiciService.getTopicEntries(pTopic).subscribe(
+    this.eksiciService.getTopicEntries(pHref).subscribe(
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {

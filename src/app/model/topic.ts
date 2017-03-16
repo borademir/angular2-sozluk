@@ -7,7 +7,8 @@ export class Topic {
     topicText           : string  = '';
     relatedEntryCount   : number  = 0 ;
     type                : string  = '';
-    entryList          : Entry[] = null;
+    entryList           : Entry[] = null;
+    nextPageHref        : string  = '';
 
     constructor(values: Object = {}){
         Object.assign(this,values)

@@ -1,5 +1,6 @@
+import {EksiBaseModel} from '../model/eksibase';
 
-export class Channel {
+export class Channel extends EksiBaseModel {
     
     href            : string  = '';
     creationDate    : number  = 0 ;
@@ -9,6 +10,7 @@ export class Channel {
     complete        : boolean = false;
 
     constructor(values: Object = {}){
+        super();
         Object.assign(this,values)
     }
 }

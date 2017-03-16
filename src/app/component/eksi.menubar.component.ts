@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo';
 import { TodoDataService } from '../service/todo-data.service';
 import { EksiciService } from '../service/eksici.service';
+import { Channel }                 from '../model/channel';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -13,7 +14,7 @@ import 'rxjs/add/operator/catch';
 })
 export class EksiMenuBarComponent {
 
-  channels: Object[];
+  channels: Channel[];
   errorMessage: String;
   isDataAvailable: boolean = false;
 

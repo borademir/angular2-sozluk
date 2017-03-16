@@ -1,0 +1,30 @@
+#index-section {
+    position: fixed;
+    top: 151px;
+    margin-bottom: 0;
+    bottom: 0;
+    height:  100%;
+
+}
+
+#topic-list-div {
+    max-height: 740px;
+    
+}
+#index-section {
+    width: 400px;
+}
+
+#main {
+    margin-left: 190px;
+}
+
+#main {
+    margin-left: 245px;
+}
+
+
+user agent stylesheet
+div {
+    display: block;
+}

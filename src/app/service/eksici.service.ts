@@ -4,7 +4,7 @@ import { Observable }              from 'rxjs/Observable';
 import { Channel }                 from '../model/channel';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-
+import {Topic} from '../model/topic';
 
 @Injectable()
 export class EksiciService {
@@ -12,7 +12,7 @@ export class EksiciService {
   
   constructor (private http: Http) {}
 
-  getChannels (): Observable<Object[]> {
+  getChannels (): Observable<Channel[]> {
     console.log('get channels baslar');
     let resp: Observable<Channel[]> = this.http.get(this.apiBaseUrl + 'channels')
                    // .map(this.extractData)
@@ -21,6 +21,18 @@ export class EksiciService {
     console.log('get channels biter');
     return resp;
   }
+
+
+  getTopics (pTopicType: String): Observable<Topic[]> {
+    console.log('get topics baslar');
+    let resp: Observable<Topic[]> = this.http.get(this.apiBaseUrl + 'topic/' + pTopicType)
+                    .map((response: Response) => <Topic[]>response.json())
+                    .catch(this.handleError);
+    console.log('get topics biter');
+    return resp;
+  }
+
+
   private extractData(res: Response) {
     let body = res.json();
     console.log(body);

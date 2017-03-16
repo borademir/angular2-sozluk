@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo';
-import { TodoDataService } from '../service/todo-data.service';
 import { EksiciService } from '../service/eksici-http-service';
 import { Channel }                 from '../model/channel';
 import { EksiSharedService } from '../service/eksi-shared.service';

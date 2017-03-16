@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
-import { TodoDataService } from '../service/todo-data.service';
 import { EksiciService } from '../service/eksici-http-service';
 import { EksiSharedService } from '../service/eksi-shared.service';
 import { Topic } from '../model/topic';
@@ -18,7 +17,6 @@ export class EksiLeftsideComponent {
 
   topics: Topic[] = [];
   errorMessage: String;
-  isDataAvailable: boolean = false;
 
   constructor(
     private eksiciService: EksiciService,
@@ -31,7 +29,6 @@ export class EksiLeftsideComponent {
       error => this.errorMessage = <any>error,
       () => {
         this.isDataAvailable = true;
-        console.log(this.isDataAvailable + " info..");
         console.log("the subscription is completed " + this.topics + " topics loaded..");
       }
 

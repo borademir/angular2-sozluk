@@ -2,9 +2,11 @@ import { Injectable }              from '@angular/core';
 import { Http, Response }          from '@angular/http';
 import { Observable }              from 'rxjs/Observable';
 import { Channel }                 from '../model/channel';
+import { TopicPager} from '../model/topicpager';
+import { Topic } from '../model/topic';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
-import {TopicPager} from '../model/topicpager';
+
 
 @Injectable()
 export class EksiciService {
@@ -32,6 +34,14 @@ export class EksiciService {
     return resp;
   }
 
+  getTopicEntries (pTopic: Topic): Observable<Topic> {
+    console.log('get topic entries baslar');
+    let resp: Observable<Topic> = this.http.get(this.apiBaseUrl + 'topics/entries?topicsHref=' + pTopic.href)
+                    .map((response: Response) => <Topic>response.json())
+                    .catch(this.handleError);
+    console.log('get topic entries biter');
+    return resp;
+  }
 
   private extractData(res: Response) {
     let body = res.json();

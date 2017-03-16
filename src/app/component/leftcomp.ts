@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
-
+import {Topic} from '../model/topic';
 import { EksiSharedService } from '../service/eksi-shared.service';
 
 
@@ -18,14 +18,12 @@ export class EksiLeftsideComponent {
   constructor(private eksiciSharedService : EksiSharedService) {}
 
   ngOnInit(): void {
-    if (!this.eksiciSharedService.sessionbean.topicsType) {
-      this.eksiciSharedService.sessionbean.topicsType = 'bugün';
-    }
-    this.eksiciSharedService.loadTopicsAsync('topic/today','Bugün');
+    this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
   }
 
-  openTopic(pTopicHref: string) {
-    console.log(pTopicHref + ' clicked..')
+  openTopicEntries(pTopic: Topic) {
+    console.log(pTopic.href + ' clicked..');
+    this.eksiciSharedService.loadTopicEntriesAsync(pTopic);
   }
 
 

@@ -6,7 +6,7 @@
         <div class="col-md-4" style="overflow: scroll; max-height: 800px;">
             <div class="well">{{eksiciSharedService.sessionbean.topicsTypeDescription}}</div>
             <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.topicsCurrentPage.contentList">
-                <a href="#" class="list-group-item" (click)="openTopic(topic.href)">
+                <a href="#" class="list-group-item" (click)="openTopicEntries(topic)">
                     {{topic.topicText}}
                     <span class="badge">{{topic.relatedEntryCount}}</span>
                 </a>

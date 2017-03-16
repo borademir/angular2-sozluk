@@ -35,6 +35,18 @@ export class EksiMenuBarComponent {
     );
   }
 
+  openTodaysTopicList(){
+    console.log('today topic clicked');
+  }
+
+  openPopularTopicList(){
+    console.log('popular topic clicked');
+  }
+
+  openChannelTopicList(pChannel: Channel){
+    console.log(pChannel.name + ' clicked');
+  }
+
   ngOnInit(): void {
 
     this.loadChannels();

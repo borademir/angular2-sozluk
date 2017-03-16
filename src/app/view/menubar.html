@@ -1,4 +1,4 @@
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container-fluid">
 
         <div class="navbar-header">
@@ -11,11 +11,11 @@
         </ul>
         <ul class="nav navbar-nav">
 
-            <li class="active"><a href="#">bugün</a></li>
-            <li><a href="#">gündem</a></li>
+            <li class="active"><a href="#" (click)="openTodaysTopicList(channel)">bugün</a></li>
+            <li><a href="#" (click)="openPopularTopicList(channel)">gündem</a></li>
             <li><a href="#">tarihte bugün</a></li>
             <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="channels">
-                <li *ngIf="i<12"><a href="#">{{channel.name}}</a></li>
+                <li *ngIf="i<12"><a href="#" (click)="openChannelTopicList(channel)">{{channel.name}}</a></li>
             </template>
            
 
@@ -28,7 +28,7 @@
                     <li role="menuitem"><a class="dropdown-item" href="#">başıboşlar</a></li>
                 </ul>
             </li>
-
+            <li><a href="#">video</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> kayıt ol</a></li>

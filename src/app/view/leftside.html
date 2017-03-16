@@ -1,12 +1,19 @@
-{{topicsTypeDescription}}
-<div id="container" class="container2">
-    <div id="index-section" class="robots-nocontent">
-        <div class="list-group pre-scrollable" id="topic-list-div">
 
+<div class="container-fluid" style="padding-top: 35px;">
+    
+    <div class="row-fluid">
+        
+        <div class="col-md-4" style="overflow: scroll; max-height: 800px;">
+            <div class="well">{{topicsTypeDescription}}</div>
             <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="topics.contentList">
-                <a href="#" class="list-group-item">{{topic.topicText}}<span class="badge">{{topic.relatedEntryCount}}</span></a>
+                <a href="#" class="list-group-item" (click)="openTopic(topic.href)">
+                    {{topic.topicText}}
+                    <span class="badge">{{topic.relatedEntryCount}}</span>
+                </a>
             </template>
-
+        </div>
+        <div class="col-md-10">
+            Body content
         </div>
     </div>
 </div>

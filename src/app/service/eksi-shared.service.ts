@@ -40,6 +40,7 @@ export class EksiSharedService {
       () => {
         console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
         console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
+        console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
       }
 
     );

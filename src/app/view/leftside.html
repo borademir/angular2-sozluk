@@ -4,7 +4,7 @@
     <div class="row-fluid">
         
         <div class="col-md-4" style="overflow: scroll; max-height: 800px;">
-            <div class="well">{{topicsTypeDescription}}</div>
+            <div class="well">{{eksiciSharedService.sessionbean.topicsTypeDescription}}</div>
             <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="topicsCurrentPage.contentList">
                 <a href="#" class="list-group-item" (click)="openTopic(topic.href)">
                     {{topic.topicText}}

@@ -10,7 +10,7 @@ import { AppComponent } from './component/rootcomp';
 import { EksiMenuBarComponent} from './component/menubarcomp';
 import { EksiLeftsideComponent} from './component/leftcomp';
 import { EksiSharedService } from './service/eksi-shared.service';
-
+import { EksiciService } from './service/eksici-http-service';
 
 
 @NgModule({
@@ -25,7 +25,7 @@ import { EksiSharedService } from './service/eksi-shared.service';
     NgbModule.forRoot(),
     DropdownModule.forRoot()
   ],
-  providers: [EksiSharedService],
+  providers: [EksiSharedService,EksiciService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

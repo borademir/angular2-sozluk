@@ -11,9 +11,9 @@
         </ul>
         <ul class="nav navbar-nav">
 
-            <li class="active"><a href="#" (click)="openTodaysTopicList(channel)">bugün</a></li>
-            <li><a href="#" (click)="openPopularTopicList(channel)">gündem</a></li>
-            <li><a href="#">tarihte bugün</a></li>
+            <li class="active"><a href="#" (click)="openTodaysTopicList()">bugün</a></li>
+            <li><a href="#" (click)="openPopularTopicList()">gündem</a></li>
+            <li><a href="#" (click)="openTodayInHistoryTopicList()">tarihte bugün</a></li>
             <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="channels">
                 <li *ngIf="i<12"><a href="#" (click)="openChannelTopicList(channel)">{{channel.name}}</a></li>
             </template>
@@ -22,13 +22,13 @@
             <li dropdown><a href="#" dropdownToggle>...</a>
                 <ul dropdownMenu role="menu" aria-labelledby="single-button">
                     <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="channels">
-                        <li *ngIf="i>12"><a href="#">{{channel.name}}</a></li>
+                        <li *ngIf="i>12"><a href="#" (click)="openChannelTopicList(channel)">{{channel.name}}</a></li>
                     </template>
                     <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item" href="#">başıboşlar</a></li>
+                    <li role="menuitem"><a class="dropdown-item" href="#" (click)="openDesertedTopicList()">başıboşlar</a></li>
                 </ul>
             </li>
-            <li><a href="#">video</a></li>
+            <li><a href="#" (click)="openVideoTopicList()">video</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="#"><span class="glyphicon glyphicon-user"></span> kayıt ol</a></li>

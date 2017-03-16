@@ -7,6 +7,7 @@ import { TopicPager } from '../model/topicpager';
 export class SessionBean {
 
     topicsType: String;
+    topicsTypeDescription: String;
     topicsCurrentPage: TopicPager = new TopicPager();
     errorMessage: String;
 

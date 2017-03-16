@@ -40,16 +40,38 @@ export class EksiMenuBarComponent {
   openTodaysTopicList(){
     console.log('today topic clicked');
     this.eksiciSharedService.sessionbean.topicsType = 'bugün';
+    this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
   }
+
+  openTodayInHistoryTopicList(){
+    console.log('today topic clicked');
+    this.eksiciSharedService.sessionbean.topicsType = 'bugün';
+    this.eksiciSharedService.loadTopicsAsync('topic/todayinhistory/2002','tarihte bugün');
+  }
+
+  openVideoTopicList(){
+    console.log('video topic clicked');
+    this.eksiciSharedService.sessionbean.topicsType = 'bugün';
+    this.eksiciSharedService.loadTopicsAsync('topic/videos','videolar');
+  }
+  
+
+
 
   openPopularTopicList(){
     console.log('popular topic clicked');
     this.eksiciSharedService.sessionbean.topicsType = 'gündem';
+    this.eksiciSharedService.loadTopicsAsync('topic/popular','gündem');
   }
 
   openChannelTopicList(pChannel: Channel){
     console.log(pChannel.name + ' clicked');
-    this.eksiciSharedService.sessionbean.topicsType = pChannel.name;
+    this.eksiciSharedService.loadTopicsAsync('channels/topics?topicsHref=' + pChannel.href,pChannel.name);
+  }
+
+  openDesertedTopicList(){
+    console.log('başıboşlar clicked');
+    this.eksiciSharedService.loadTopicsAsync('topic/deserted','başıboşlar');
   }
 
   ngOnInit(): void {

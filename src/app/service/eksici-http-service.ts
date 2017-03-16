@@ -25,7 +25,7 @@ export class EksiciService {
 
   getTopics (pTopicType: String): Observable<TopicPager> {
     console.log('get topics baslar');
-    let resp: Observable<TopicPager> = this.http.get(this.apiBaseUrl + 'topic/' + pTopicType)
+    let resp: Observable<TopicPager> = this.http.get(this.apiBaseUrl + pTopicType)
                     .map((response: Response) => <TopicPager>response.json())
                     .catch(this.handleError);
     console.log('get topics biter');

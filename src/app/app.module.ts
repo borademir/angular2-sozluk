@@ -10,7 +10,7 @@ import { AppComponent } from './component/app.component';
 import { TodoComponent } from './component/todo.component';
 import { EksiMenuBarComponent} from './component/eksi.menubar.component';
 import { EksiLeftsideComponent} from './component/eksi.leftside.component';
-
+import { EksiSharedService } from './service/eksi-shared.service';
 
 
 
@@ -26,7 +26,7 @@ import { EksiLeftsideComponent} from './component/eksi.leftside.component';
     NgbModule.forRoot(),
     DropdownModule.forRoot()
   ],
-  providers: [],
+  providers: [EksiSharedService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

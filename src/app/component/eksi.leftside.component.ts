@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
 import { TodoDataService } from '../service/todo-data.service';
 import { EksiciService } from '../service/eksici.service';
+import { EksiSharedService } from '../service/eksi-shared.service';
 import { Topic } from '../model/topic';
 
 import 'rxjs/add/operator/map';
@@ -20,8 +21,9 @@ export class EksiLeftsideComponent {
   errorMessage: String;
   isDataAvailable: boolean = false;
 
-  constructor(private eksiciService: EksiciService) {
-  }
+  constructor(
+    private eksiciService: EksiciService,
+    private eksiciSharedService : EksiSharedService) {}
 
   loadTopics() {
     console.log('loading topics');

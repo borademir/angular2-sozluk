@@ -14,28 +14,19 @@ import 'rxjs/add/operator/catch';
   providers: []
 })
 export class EksiLeftsideComponent {
-
-
-
-  constructor(
-    private eksiciSharedService : EksiSharedService) {}
-
-
-
-  openTopic(pTopicHref: string) {
-    console.log(pTopicHref + ' clicked..')
-  }
+  
+  constructor(private eksiciSharedService : EksiSharedService) {}
 
   ngOnInit(): void {
     if (!this.eksiciSharedService.sessionbean.topicsType) {
       this.eksiciSharedService.sessionbean.topicsType = 'bugün';
     }
     this.eksiciSharedService.loadTopicsAsync('topic/today','Bugün');
-
   }
 
-  get topicsCurrentPage(){
-    return this.eksiciSharedService.sessionbean.topicsCurrentPage;
+  openTopic(pTopicHref: string) {
+    console.log(pTopicHref + ' clicked..')
   }
+
 
 }

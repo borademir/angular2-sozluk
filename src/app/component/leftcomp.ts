@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
 import { EksiciService } from '../service/eksici-http-service';
 import { EksiSharedService } from '../service/eksi-shared.service';
-import { Topic } from '../model/topic';
+
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -15,21 +15,19 @@ import 'rxjs/add/operator/catch';
 })
 export class EksiLeftsideComponent {
 
-  topics: Topic[] = [];
-  errorMessage: String;
+
 
   constructor(
     private eksiciService: EksiciService,
     private eksiciSharedService : EksiSharedService) {}
 
-  loadTopics() {
+  loadTopics(ptopicsType: string) {
     console.log('loading topics');
-    this.eksiciService.getTopics(this.eksiciSharedService.sessionbean.topicsType).subscribe(
-      data => this.topics = data,
-      error => this.errorMessage = <any>error,
+    this.eksiciService.getTopics(ptopicsType).subscribe(
+      data => this.eksiciSharedService.sessionbean.topicsCurrentPage = data,
+      error => this.eksiciSharedService.sessionbean.errorMessage = <any>error,
       () => {
-        this.isDataAvailable = true;
-        console.log("the subscription is completed " + this.topics + " topics loaded..");
+        console.log("the subscription is completed " + this.eksiciSharedService.sessionbean.topicsCurrentPage.contentList + " topics loaded..");
       }
 
     );
@@ -43,12 +41,16 @@ export class EksiLeftsideComponent {
     if (!this.eksiciSharedService.sessionbean.topicsType) {
       this.eksiciSharedService.sessionbean.topicsType = 'today';
     }
-    this.loadTopics();
+    this.loadTopics('today');
 
   }
 
   get topicsTypeDescription() {
     return this.eksiciSharedService.sessionbean.topicsType;
+  }
+
+  get topicsCurrentPage(){
+    return this.eksiciSharedService.sessionbean.topicsCurrentPage;
   }
 
 }

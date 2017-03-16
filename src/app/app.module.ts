@@ -6,10 +6,10 @@ import { HttpModule , JsonpModule } from '@angular/http';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DropdownModule } from 'ng2-bootstrap';
 
-import { AppComponent } from './component/app.component';
+import { AppComponent } from './component/rootcomp';
 import { TodoComponent } from './component/todo.component';
-import { EksiMenuBarComponent} from './component/eksi.menubar.component';
-import { EksiLeftsideComponent} from './component/eksi.leftside.component';
+import { EksiMenuBarComponent} from './component/menubarcomp';
+import { EksiLeftsideComponent} from './component/leftcomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 
 

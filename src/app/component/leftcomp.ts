@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
 import { TodoDataService } from '../service/todo-data.service';
-import { EksiciService } from '../service/eksici.service';
+import { EksiciService } from '../service/eksici-http-service';
 import { EksiSharedService } from '../service/eksi-shared.service';
 import { Topic } from '../model/topic';
 
@@ -17,7 +17,6 @@ import 'rxjs/add/operator/catch';
 export class EksiLeftsideComponent {
 
   topics: Topic[] = [];
-  topicsType: string;
   errorMessage: String;
   isDataAvailable: boolean = false;
 
@@ -27,7 +26,7 @@ export class EksiLeftsideComponent {
 
   loadTopics() {
     console.log('loading topics');
-    this.eksiciService.getTopics(this.topicsType).subscribe(
+    this.eksiciService.getTopics(this.eksiciSharedService.sessionbean.topicsType).subscribe(
       data => this.topics = data,
       error => this.errorMessage = <any>error,
       () => {
@@ -44,21 +43,15 @@ export class EksiLeftsideComponent {
   }
 
   ngOnInit(): void {
-    if (!this.topicsType) {
-      this.topicsType = 'today';
+    if (!this.eksiciSharedService.sessionbean.topicsType) {
+      this.eksiciSharedService.sessionbean.topicsType = 'today';
     }
     this.loadTopics();
 
   }
 
   get topicsTypeDescription() {
-    if (this.topicsType) {
-      if (this.topicsType === 'today') {
-        return "bugün";
-      } else if (this.topicsType == 'popular') {
-        return "gündem";
-      }
-    }
+    return this.eksiciSharedService.sessionbean.topicsType;
   }
 
 }

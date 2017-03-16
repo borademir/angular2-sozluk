@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo';
 import { TodoDataService } from '../service/todo-data.service';
-import { EksiciService } from '../service/eksici.service';
+import { EksiciService } from '../service/eksici-http-service';
 import { Channel }                 from '../model/channel';
+import { EksiSharedService } from '../service/eksi-shared.service';
 
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -18,7 +19,9 @@ export class EksiMenuBarComponent {
   errorMessage: String;
   isDataAvailable: boolean = false;
 
-  constructor(private eksiciService: EksiciService) {
+  constructor(
+    private eksiciService: EksiciService,
+    private eksiciSharedService : EksiSharedService) {
   }
 
   loadChannels() {
@@ -37,14 +40,17 @@ export class EksiMenuBarComponent {
 
   openTodaysTopicList(){
     console.log('today topic clicked');
+    this.eksiciSharedService.sessionbean.topicsType = 'bugün';
   }
 
   openPopularTopicList(){
     console.log('popular topic clicked');
+    this.eksiciSharedService.sessionbean.topicsType = 'gündem';
   }
 
   openChannelTopicList(pChannel: Channel){
     console.log(pChannel.name + ' clicked');
+    this.eksiciSharedService.sessionbean.topicsType = pChannel.name;
   }
 
   ngOnInit(): void {

@@ -1,6 +1,6 @@
 <table style="width:100%;height: 100%;">
     <tr valign="top">
-        <td>
+        <td width="30%">
             <div class="container-fluid" style="padding-top: 35px;">
 
                 <div class="row-fluid">
@@ -15,28 +15,57 @@
                 </div>
             </div>
         </td>
-        <td>
-            <div class="container">
+        <td width="70%">
+
+            <div class="container-fluid">
+
+
                 <div class="page-header">
-                    <h1 id="timeline">{{eksiciSharedService.sessionbean.currentTopic.topicText}}</h1>
+                    <h2>{{eksiciSharedService.sessionbean.currentTopic.topicText}}</h2>
                 </div>
-                <ul class="timeline-fullwidth">
+
+
+                <div class="timeline" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
+
+                    <div class="line text-muted"></div>
+
+                    <div class="separator text-muted">
+                        <hr/>
+                    </div>
                     <template ngFor let-i="index" let-c="count" let-entry [ngForOf]="eksiciSharedService.sessionbean.currentTopic.entryList">
-                        <li>
-                            <div [ngClass]="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-body">
-                                    <p>{{entry.entryText}}</p>
-                                </div>
-                                <div class="timeline-heading">
-                                    
-                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small></p>
-                                </div>
+
+                        <article class="panel panel-primary">
+
+                            <div class="panel-heading icon">
+                                <i class="glyphicon glyphicon-sunglasses"></i>
                             </div>
-                        </li>
+
+                            <div class="panel-heading" style="display: block;">
+                                <a href="#" class="entry-suser-link">
+                                    <i class="glyphicon glyphicon-user"></i>
+                                    <span>{{entry.suser.entryAuthor}}</span>
+                                </a>
+                                
+                            </div>
+
+                            <div class="panel-body" [innerHtml]="entry.entryHtml">
+
+                            </div>
+
+                            <div class="panel-footer">
+                                <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
+                                <span class="badge">{{entry.favoriteCount}}</span>
+
+                            </div>
+
+                        </article>
                     </template>
-                </ul>
+
+                </div>
+
+
             </div>
+
         </td>
     </tr>
 </table>

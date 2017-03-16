@@ -1,3 +1,6 @@
+
+import { Suser } from './suser'
+
 export class Entry {
 
     href                : string  = '';
@@ -7,6 +10,8 @@ export class Entry {
     entryText           : string  = '';
     entryHtml           : string  = '';
     entryDate           : string  = '';
+    Suser               : Suser   = null;
+
 
     constructor(values: Object = {}){
         Object.assign(this,values)

@@ -17,19 +17,27 @@
         </td>
         <td width="70%">
 
-            <div class="container-fluid">
+            <div class="container-fluid" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
 
 
                 <div class="page-header">
                     <h2>{{eksiciSharedService.sessionbean.currentTopic.topicText}}</h2>
-                    <ul class="pager">
-                        <li><a href="#">Previous</a></li>
-                        <li><a href="#" (click)="openTopicEntries(eksiciSharedService.sessionbean.currentTopic.nextPageHref)" title="">{{eksiciSharedService.sessionbean.currentTopic.nextPageHref}}</a></li>
-                    </ul>
+
+                    <li dropdown><a href="#" dropdownToggle>Sayfa ->   {{eksiciSharedService.sessionbean.currentTopic.currentEntryPage}}</a>
+                        <ul dropdownMenu role="menu" aria-labelledby="single-button">
+                            <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
+                                <li role="menuitem"><a href="#" (click)="openTopicEntries(page.pageHref)" class="dropdown-item">{{page.pageNumber}}</a></li>
+                            </template>
+                            <li class="divider dropdown-divider"></li>
+                            <li role="menuitem"><a class="dropdown-item" href="#" (click)="openDesertedTopicList()">başıboşlar</a></li>
+                        </ul>
+                    </li>
+
+
                 </div>
 
 
-                <div class="timeline" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
+                <div class="timeline">
 
                     <div class="line text-muted"></div>
 

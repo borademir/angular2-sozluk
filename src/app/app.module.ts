@@ -24,6 +24,24 @@ const appRoutes: Routes = [
       type:  'classic'
     }
   },
+  { 
+    path: 'deserted'          , 
+    component: EksiLeftsideComponent ,
+    data: {
+      href: 'topic/deserted',
+      title: 'başıboşlar',
+      type:  'classic'
+    }
+  },
+  { 
+    path: 'videos'          , 
+    component: EksiLeftsideComponent ,
+    data: {
+      href: 'topic/videos',
+      title: 'videolar',
+      type:  'classic'
+    }
+  },
   { path: 'popular'        , 
     component: EksiLeftsideComponent ,
     data: {

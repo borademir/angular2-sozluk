@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../model/todo';
 import { EksiciService } from '../service/eksici-http-service';
-import { Channel }                 from '../model/channel';
 import { EksiSharedService } from '../service/eksi-shared.service';
-
+import { Channel }                 from '../model/channel';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -14,9 +13,8 @@ import 'rxjs/add/operator/catch';
 })
 export class EksiMenuBarComponent {
 
-  channels: Channel[];
+  
   errorMessage: String;
-  isDataAvailable: boolean = false;
 
   constructor(
     private eksiciService: EksiciService,
@@ -26,12 +24,10 @@ export class EksiMenuBarComponent {
   loadChannels() {
     console.log('loading channels');
     this.eksiciService.getChannels().subscribe(
-      data => this.channels = data,
+      data => this.eksiciSharedService.sessionbean.channels = data,
       error => this.errorMessage = <any>error,
       () => {
-        this.isDataAvailable = true;
-        console.log(this.isDataAvailable + " info..");
-        console.log("the subscription is completed " + this.channels[0]+ " channels loaded..");
+        console.log("the subscription is completed " + this.eksiciSharedService.sessionbean.channels[0]+ " channels loaded..");
       }
 
     );

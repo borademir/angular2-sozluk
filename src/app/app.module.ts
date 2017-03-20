@@ -12,6 +12,35 @@ import { EksiLeftsideComponent} from './component/leftcomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
 
+import { RouterModule, Routes } from '@angular/router';
+
+const appRoutes: Routes = [
+  { 
+    path: 'today'          , 
+    component: EksiLeftsideComponent ,
+    data: {
+      href: 'topic/today',
+      title: 'bugün',
+      type:  'classic'
+    }
+  },
+  { path: 'popular'        , 
+    component: EksiLeftsideComponent ,
+    data: {
+      href: 'topic/popular',
+      title: 'gündem',
+      type:  'classic'
+    }
+  },
+  { path: 'todayinhistory/:year'        , 
+    component: EksiLeftsideComponent ,
+    data: {
+      href: 'topic/todayinhistory/',
+      title: 'tarihte bugün',
+      type:  'history'
+    }
+  }
+];
 
 @NgModule({
   declarations: [
@@ -23,7 +52,8 @@ import { EksiciService } from './service/eksici-http-service';
     HttpModule,
     JsonpModule,
     NgbModule.forRoot(),
-    DropdownModule.forRoot()
+    DropdownModule.forRoot(),
+    RouterModule.forRoot(appRoutes)
   ],
   providers: [EksiSharedService,EksiciService],
   bootstrap: [AppComponent]

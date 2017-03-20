@@ -11,10 +11,10 @@
         </ul>
         <ul class="nav navbar-nav">
 
-            <li class="active"><a href="#" (click)="openTodaysTopicList()">bugün</a></li>
-            <li><a href="#" (click)="openPopularTopicList()">gündem</a></li>
-            <li><a href="#" (click)="openTodayInHistoryTopicList()">tarihte bugün</a></li>
-            <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="channels">
+            <li class="active"><a routerLink="/today" routerLinkActive="active">bugün</a></li>
+            <li><a routerLink="/popular" routerLinkActive="active">gündem</a></li>                
+            <li><a routerLink="/todayinhistory/getRandom" routerLinkActive="active">tarihte bugün</a></li>
+            <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
                 <li *ngIf="i<12"><a href="#" (click)="openChannelTopicList(channel)">{{channel.name}}</a></li>
             </template>
            

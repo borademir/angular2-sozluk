@@ -1,11 +1,13 @@
 import { TopicPager } from '../model/topicpager';
 import { Topic } from '../model/topic';
+import { Channel }                 from '../model/channel';
 
 /**
  * All session variables over shared service
  */
 export class SessionBean {
 
+    channels: Channel[];
     topicsType: String;
     topicsTypeDescription: String;
     topicsCurrentPage: TopicPager = new TopicPager();

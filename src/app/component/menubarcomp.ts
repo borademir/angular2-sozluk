@@ -65,6 +65,12 @@ export class EksiMenuBarComponent {
     this.eksiciSharedService.loadTopicsAsync('channels/topics?topicsHref=' + pChannel.href,pChannel.name);
   }
 
+  getChannellRouterLink(pChannel: Channel){
+   let routerLink = "channels/"+pChannel.name.substring(1)+"/topics";
+   //console.log(pChannel.name + ' rouerLink:' + routerLink);
+   return routerLink;
+  }
+
   openDesertedTopicList(){
     console.log('başıboşlar clicked');
     this.eksiciSharedService.loadTopicsAsync('topic/deserted','başıboşlar');

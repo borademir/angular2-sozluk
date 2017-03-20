@@ -39,7 +39,14 @@ const appRoutes: Routes = [
       title: 'tarihte bugün',
       type:  'history'
     }
-  }
+  },
+  { path: 'channels/:channelname/topics'        , 
+    component: EksiLeftsideComponent ,
+    data: {
+      type:  'channel'
+    }
+  },
+  { path: '**', redirectTo: '/today', pathMatch: 'full' }
 ];
 
 @NgModule({

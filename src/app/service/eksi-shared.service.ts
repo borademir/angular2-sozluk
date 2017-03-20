@@ -3,6 +3,7 @@ import { SessionBean } from '../bean/sessionbean';
 import { Subject }    from 'rxjs/Subject';
 import { EksiciService } from '../service/eksici-http-service';
 import { Topic } from '../model/topic';
+import { Channel }                 from '../model/channel';
 
 @Injectable()
 export class EksiSharedService {
@@ -44,5 +45,15 @@ export class EksiSharedService {
       }
 
     );
+  }
+
+  getChannelInfoByName(pChannelName: String): Channel {
+    for(let i = 0; i < this.sessionbean.channels.length; ++i) {
+      let current = this.sessionbean.channels[i];  
+      if(('#' + pChannelName) == current.name) {
+        return current;
+      }
+    }
+    return null;
   }
 }

@@ -8,9 +8,12 @@ export class Channel extends EksiBaseModel {
     title           : string  = '';
     topicsUrl       : string  = '';   
     complete        : boolean = false;
+    routerLink      : string  = 'bora';
 
     constructor(values: Object = {}){
         super();
-        Object.assign(this,values)
+        Object.assign(this,values);
     }
+
+
 }

@@ -27,6 +27,17 @@ export class EksiLeftsideComponent {
   }
 
   ngOnInit(): void {
+    this.sub = this.route.params
+       .subscribe(params => {
+          if(params != null){
+            if(params['channelname'] != null ){
+              console.log('channelname:' + params['channelname']);
+              this.navigateToChannel(params['channelname']);
+            }
+          }
+
+      });
+      
     if(this.route.snapshot.data['type']){
         if(this.route.snapshot.data['type'] == 'classic'){
           this.eksiciSharedService.loadTopicsAsync(this.route.snapshot.data['href'], this.route.snapshot.data['title']);
@@ -35,13 +46,24 @@ export class EksiLeftsideComponent {
             this.route.snapshot.data['href'] + this.route.snapshot.params['year'], 
             this.route.snapshot.data['title'] + '(' + this.route.snapshot.params['year'] + ')'
             );
+        }else if(this.route.snapshot.data['type'] == 'channel'){
+          this.navigateToChannel(this.route.snapshot.params['channelname']);
         }
+
         
     }else{
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
     
     
+  }
+
+  navigateToChannel(pChannelName: String){
+      let targetChannel = this.eksiciSharedService.getChannelInfoByName(pChannelName);
+      console.log('targtet channel:' + targetChannel);
+      if(targetChannel != null){
+        this.eksiciSharedService.loadTopicsAsync('channels/topics?topicsHref=' + targetChannel.href,targetChannel.name);
+      }
   }
 
   openTopicEntries(pHref: String) {

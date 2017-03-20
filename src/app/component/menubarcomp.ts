@@ -40,7 +40,6 @@ export class EksiMenuBarComponent {
    return routerLink;
   }
 
-
   ngOnInit(): void {
 
     this.loadChannels();

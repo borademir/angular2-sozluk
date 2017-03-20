@@ -8,10 +8,10 @@
 
                     <div class="well">{{eksiciSharedService.sessionbean.topicsTypeDescription}}</div>
                     <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.topicsCurrentPage.contentList">
-                        <a href="#" class="list-group-item" (click)="openTopicEntries(topic.href)">
-                    {{topic.topicText}}
-                    <span class="badge">{{topic.relatedEntryCount}}</span>
-                </a>
+                        <a class="list-group-item" [routerLink]="[getEntryRouterLink(topic.href)]"  routerLinkActive="active">
+                            {{topic.topicText}}
+                            <span class="badge">{{topic.relatedEntryCount}}</span>
+                        </a>
                     </template>
                 </div>
             </div>
@@ -27,10 +27,9 @@
                     <li dropdown><a href="#" dropdownToggle>Sayfa ->   {{eksiciSharedService.sessionbean.currentTopic.currentEntryPage}}</a>
                         <ul dropdownMenu role="menu" aria-labelledby="single-button">
                             <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
-                                <li role="menuitem"><a href="#" (click)="openTopicEntries(page.pageHref)" class="dropdown-item">{{page.pageNumber}}</a></li>
+                                <li role="menuitem">
+                                    <a href="#" [routerLink]="[getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
                             </template>
-                            <li class="divider dropdown-divider"></li>
-                            <li role="menuitem"><a class="dropdown-item" href="#" (click)="openDesertedTopicList()">başıboşlar</a></li>
                         </ul>
                     </li>
 

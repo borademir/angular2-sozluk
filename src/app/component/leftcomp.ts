@@ -34,6 +34,10 @@ export class EksiLeftsideComponent {
               console.log('channelname:' + params['channelname']);
               this.navigateToChannel(params['channelname']);
             }
+
+            if(params['topicHref'] != null ){
+              this.openTopicEntries(params['topicHref']);
+            }
           }
 
       });
@@ -48,9 +52,10 @@ export class EksiLeftsideComponent {
             );
         }else if(this.route.snapshot.data['type'] == 'channel'){
           this.navigateToChannel(this.route.snapshot.params['channelname']);
-        }
-
-        
+        }else if(this.route.snapshot.data['type'] == 'entry'){
+          this.openTopicEntries(this.route.snapshot.params['topicHref']);
+          
+        }        
     }else{
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
@@ -71,5 +76,10 @@ export class EksiLeftsideComponent {
     this.eksiciSharedService.loadTopicEntriesAsync(pHref);
   }
 
+
+  getEntryRouterLink(pTopicHref: String){
+   let routerLink = "topic/entries/"+pTopicHref;
+   return routerLink;
+  }
 
 }

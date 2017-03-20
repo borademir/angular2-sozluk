@@ -16,6 +16,13 @@ import { RouterModule, Routes } from '@angular/router';
 
 const appRoutes: Routes = [
   { 
+    path: 'topic/entries/:topicHref'          , 
+    component: EksiLeftsideComponent ,
+    data: {
+      type:  'entry'
+    }
+  },
+  { 
     path: 'today'          , 
     component: EksiLeftsideComponent ,
     data: {

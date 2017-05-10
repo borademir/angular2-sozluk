@@ -1,42 +1,41 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container-fluid">
+<ul class="nav navbar-top-links navbar-right">
+    <li class="active"><a routerLink="/today" routerLinkActive="active">bugün</a></li>
+    <li><a routerLink="/popular" routerLinkActive="active">gündem</a></li>                
+    <li><a routerLink="/todayinhistory/2015" routerLinkActive="active">tarihte bugün</a></li>
+    
+    <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
+        <li *ngIf="i<10">
+            <a [routerLink]="[getChannellRouterLink(channel)]"  routerLinkActive="active">{{channel.name}}</a>
+        </li>
+    </template>
 
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                
-            </a>
-        </div>
-
-        <ul class="nav navbar-nav navbar-left">
-        </ul>
-        <ul class="nav navbar-nav">
-
-            <li class="active"><a routerLink="/today" routerLinkActive="active">bugün</a></li>
-            <li><a routerLink="/popular" routerLinkActive="active">gündem</a></li>                
-            <li><a routerLink="/todayinhistory/2015" routerLinkActive="active">tarihte bugün</a></li>
+    <li dropdown><a href="#" dropdownToggle>...</a>
+        <ul dropdownMenu role="menu" aria-labelledby="single-button">
             <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
-                <li *ngIf="i<12">
-                    <a [routerLink]="[getChannellRouterLink(channel)]"  routerLinkActive="active">{{channel.name}}</a>
+                <li *ngIf="i>10">
+                    <a [routerLink]="[getChannellRouterLink(channel)]" routerLinkActive="active">{{channel.name}}</a>
                 </li>
             </template>
-           
+            <li class="divider dropdown-divider"></li>
+            <li role="menuitem"><a class="dropdown-item" routerLink="/deserted" routerLinkActive="active">başıboşlar</a></li>
+        </ul>
+    </li>
+    <li><a routerLink="/videos" routerLinkActive="active">videolar</a></li>
 
-            <li dropdown><a href="#" dropdownToggle>...</a>
-                <ul dropdownMenu role="menu" aria-labelledby="single-button">
-                    <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
-                        <li *ngIf="i>12">
-                            <a [routerLink]="[getChannellRouterLink(channel)]" routerLinkActive="active">{{channel.name}}</a>
-                        </li>
-                    </template>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item" routerLink="/deserted" routerLinkActive="active">başıboşlar</a></li>
-                </ul>
+    <li dropdown>
+        <a dropdownToggle data-toggle="dropdown" href="#">
+            <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
+        </a>
+        <ul class="dropdown-menu dropdown-user" dropdownMenu>
+            <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
             </li>
-            <li><a routerLink="/videos" routerLinkActive="active">videolar</a></li>
+            <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
+            </li>
+            <li class="divider"></li>
+            <li><a href="login.html"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+            </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> kayıt ol</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> giriş</a></li>
-        </ul>
-    </div>
-</nav>
+        <!-- /.dropdown-user -->
+    </li>
+    <!-- /.dropdown -->
+</ul>

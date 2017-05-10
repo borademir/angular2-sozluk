@@ -16,13 +16,19 @@
       "polyfills": "polyfills.ts",
       "test": "test.ts",
       "tsconfig": "tsconfig.app.json",
-      "testTsconfig": "tsconfig.spec.json",
+      "testTsconfig": "tsconfig.spec.json", 
       "prefix": "app",
       "styles": [
         "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-        "styles.css"
+        "styles.css",
+        "sb-admin/css/sb-admin-2.min.css",
+        "sb-admin/metisMenu.css",
+        "sb-admin/font-awesome/css/font-awesome.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "sb-admin/js/sb-admin-2.min.js",
+        "sb-admin/metisMenu.js"
+      ],
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",

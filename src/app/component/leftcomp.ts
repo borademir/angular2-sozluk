@@ -36,6 +36,7 @@ export class EksiLeftsideComponent {
             }
 
             if(params['topicHref'] != null ){
+              console.log('topicHref:' + params['topicHref']);
               this.openTopicEntries(params['topicHref']);
             }
           }
@@ -78,7 +79,7 @@ export class EksiLeftsideComponent {
 
 
   getEntryRouterLink(pTopicHref: String){
-   let routerLink = "topic/entries/"+pTopicHref;
+   let routerLink = "/topic/entries/"+pTopicHref;
    return routerLink;
   }
 

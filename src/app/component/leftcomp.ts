@@ -11,7 +11,7 @@ import 'rxjs/add/operator/catch';
 @Component({
   selector: 'eksi-leftside',
   templateUrl: '../view/leftside.html',
-  styleUrls: ['../view/style/left.css'],
+  //styleUrls: ['../view/style/left.css'],
   providers: []
 })
 export class EksiLeftsideComponent {

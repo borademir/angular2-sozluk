@@ -37,43 +37,30 @@
                 </div>
 
 
-                <div class="timeline">
+                
 
-                    <div class="line text-muted"></div>
+                    
 
-                    <div class="separator text-muted">
-                        <hr/>
-                    </div>
+        
                     <template ngFor let-i="index" let-c="count" let-entry [ngForOf]="eksiciSharedService.sessionbean.currentTopic.entryList">
 
-                        <article class="panel panel-primary">
-
-                            <div class="panel-heading icon">
-                                <i class="glyphicon glyphicon-pencil"></i>
+                        <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" >
+                            <div class="panel-heading">
+                                <span>{{entry.suser.entryAuthor}} ({{i%2}})</span>
                             </div>
-
-                            <div class="panel-heading" style="display: block;">
-                                <a href="#" class="entry-suser-link">
-                                    <i class="glyphicon glyphicon-user"></i>
-                                    <span>{{entry.suser.entryAuthor}}</span>
-                                </a>
-
-                            </div>
-
-                            <div class="panel-body" [innerHtml]="entry.entryHtml">
-
-                            </div>
-
+                            
+                            <div class="panel-body" [innerHtml]="entry.entryHtml"></div>
                             <div class="panel-footer">
-                                <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
-                                <span class="badge">{{entry.favoriteCount}}</span>
-
+                                    <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
+                                    <span class="badge">{{entry.favoriteCount}}</span>
                             </div>
+                        </div>
+                        
+                        
 
-                        </article>
                     </template>
 
-                </div>
+                
 
 
             </div>

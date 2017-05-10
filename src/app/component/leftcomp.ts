@@ -61,6 +61,9 @@ export class EksiLeftsideComponent {
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
     
+    if(this.eksiciSharedService.sessionbean.topicsCurrentPage.contentList == null){
+      this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
+    }
     
   }
 
@@ -77,10 +80,5 @@ export class EksiLeftsideComponent {
     this.eksiciSharedService.loadTopicEntriesAsync(pHref);
   }
 
-
-  getEntryRouterLink(pTopicHref: String){
-   let routerLink = "/topic/entries/"+pTopicHref;
-   return routerLink;
-  }
 
 }

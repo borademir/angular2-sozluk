@@ -1,22 +1,8 @@
 
 <table style="width:100%;height: 100%;">
     <tr valign="top">
-        <td width="30%">
-            <div class="container-fluid" style="padding-top: 35px;">
 
-                <div class="row-fluid">
-
-                    <div class="well">{{eksiciSharedService.sessionbean.topicsTypeDescription}}</div>
-                    <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.topicsCurrentPage.contentList">
-                        <a class="list-group-item" [routerLink]="[getEntryRouterLink(topic.href)]"  routerLinkActive="active">
-                            {{topic.topicText}}
-                            <span class="badge">{{topic.relatedEntryCount}}</span>
-                        </a>
-                    </template>
-                </div>
-            </div>
-        </td>
-        <td width="70%">
+        <td width="100%">
 
             <div class="container-fluid" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
 
@@ -28,7 +14,7 @@
                         <ul dropdownMenu role="menu" aria-labelledby="single-button">
                             <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
                                 <li role="menuitem">
-                                    <a href="#" [routerLink]="[getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
+                                    <a href="#" [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
                             </template>
                         </ul>
                     </li>

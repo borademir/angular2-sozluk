@@ -1,0 +1,7 @@
+<div class="well">{{eksiciSharedService.sessionbean.topicsTypeDescription}}</div>
+<template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.topicsCurrentPage.contentList">
+    <a class="list-group-item" [routerLink]="[eksiciSharedService.getEntryRouterLink(topic.href)]"  routerLinkActive="active">
+        {{topic.topicText}}
+        <span class="badge">{{topic.relatedEntryCount}}</span>
+    </a>
+</template>

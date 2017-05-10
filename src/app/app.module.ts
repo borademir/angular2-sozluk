@@ -8,6 +8,7 @@ import { DropdownModule } from 'ng2-bootstrap';
 
 import { AppComponent } from './component/rootcomp';
 import { EksiMenuBarComponent} from './component/menubarcomp';
+import { TopicListComponent} from './component/topiclistcomp';
 import { EksiLeftsideComponent} from './component/leftcomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
@@ -76,7 +77,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,EksiMenuBarComponent,EksiLeftsideComponent
+    AppComponent,EksiMenuBarComponent,EksiLeftsideComponent, TopicListComponent
   ],
   imports: [
     BrowserModule,

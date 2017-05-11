@@ -1,12 +1,7 @@
-
 <table style="width:100%;height: 100%;">
     <tr valign="top">
-
         <td width="100%">
-
             <div class="container-fluid" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
-
-
                 <div class="page-header">
 
                     <div class="panel panel-info">
@@ -26,54 +21,46 @@
                             <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
                             <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Şükela:  tümü | bugün  başlıkta ara</small>
                         </div>
-
                     </div>
 
-                    <ul>
-                        <li dropdown>
-                            <a dropdownToggle data-toggle="dropdown" href="#">
-                                Sayfa {{eksiciSharedService.sessionbean.currentTopic.currentEntryPage}} <i class="fa fa-caret-down"></i>
-                            </a>
-                            <ul dropdownMenu>
-                                <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
-                                    <li role="menuitem">
-                                        <a href="#" [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
-                                </template>
-                            </ul>
-                        </li>
-                    </ul>
+                    <div class="text-center">
+                        <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
+                            <button type="button" *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 "
+                                    [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page.pageNumber , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber}"
+                                    [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"
+                                    [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber">
+                                {{page.pageNumber}}
+                            </button>
+                        </template>
+                    </div>
 
                 </div>
 
-
-                
-
-                    
-
-        
-                    <template ngFor let-i="index" let-c="count" let-entry [ngForOf]="eksiciSharedService.sessionbean.currentTopic.entryList">
-
-                        <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" >
-                            <div class="panel-heading">
-                                <span>{{entry.suser.entryAuthor}} ({{i%2}})</span>
-                            </div>
-                            
-                            <div class="panel-body" [innerHtml]="entry.entryHtml"></div>
-                            <div class="panel-footer">
-                                    <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
-                                    <span class="badge">{{entry.favoriteCount}}</span>
-                            </div>
+                <template ngFor let-i="index" let-c="count" let-entry [ngForOf]="eksiciSharedService.sessionbean.currentTopic.entryList">
+                    <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" >
+                        <div class="panel-heading">
+                            <span>{{entry.suser.entryAuthor}}</span>
                         </div>
-                        
-                        
+                        <div class="panel-body" [innerHtml]="entry.entryHtml"></div>
+                        <div class="panel-footer">
+                                <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
+                                <span class="badge" *ngIf="entry.favoriteCount > 0">{{entry.favoriteCount}}</span>
+                        </div>
+                    </div>
+                </template>
 
+                <div class="text-center">
+                    <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
+                        <button type="button" *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 "
+                                [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page.pageNumber , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber}"
+                                [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"
+                                [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber">
+                            {{page.pageNumber}}
+                        </button>
                     </template>
-
-                
-
+                </div>
 
             </div>
-
         </td>
     </tr>
 </table>

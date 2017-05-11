@@ -21,17 +21,11 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#">
-                            <div class="panel-footer">
-                                <span class="pull-left">
-                                    <button type="button" class="btn btn-primary" data-toggle="button">
-                                        Single toggle
-                                    </button>                       
-                                </span>
-                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
-                                <div class="clearfix"></div>
-                            </div>
-                        </a>
+                        <div class="panel-footer">
+                            <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                            <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
+                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Şükela:  tümü | bugün  başlıkta ara</small>
+                        </div>
 
                     </div>
 
@@ -46,7 +40,6 @@
                                         <a href="#" [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
                                 </template>
                             </ul>
-                            <!-- /.dropdown-user -->
                         </li>
                     </ul>
 

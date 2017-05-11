@@ -8,17 +8,47 @@
 
 
                 <div class="page-header">
-                    <h2>{{eksiciSharedService.sessionbean.currentTopic.topicText}}</h2>
 
-                    <li dropdown><a href="#" dropdownToggle>Sayfa ->   {{eksiciSharedService.sessionbean.currentTopic.currentEntryPage}}</a>
-                        <ul dropdownMenu role="menu" aria-labelledby="single-button">
-                            <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
-                                <li role="menuitem">
-                                    <a href="#" [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
-                            </template>
-                        </ul>
-                    </li>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <div class="huge">{{eksiciSharedService.sessionbean.currentTopic.topicText}}</div>
+                                    <div></div>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#">
+                            <div class="panel-footer">
+                                <span class="pull-left">
+                                    <button type="button" class="btn btn-primary" data-toggle="button">
+                                        Single toggle
+                                    </button>                       
+                                </span>
+                                <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
 
+                    </div>
+
+                    <ul>
+                        <li dropdown>
+                            <a dropdownToggle data-toggle="dropdown" href="#">
+                                Sayfa {{eksiciSharedService.sessionbean.currentTopic.currentEntryPage}} <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul dropdownMenu>
+                                <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
+                                    <li role="menuitem">
+                                        <a href="#" [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"  routerLinkActive="active" class="dropdown-item">{{page.pageNumber}}</a></li>
+                                </template>
+                            </ul>
+                            <!-- /.dropdown-user -->
+                        </li>
+                    </ul>
 
                 </div>
 

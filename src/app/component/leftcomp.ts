@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
 import {Topic} from '../model/topic';
 import { EksiSharedService } from '../service/eksi-shared.service';
-import { Router, ActivatedRoute, Params, Data } from '@angular/router';
+import { Router, ActivatedRoute, Params, Data , NavigationEnd } from '@angular/router';
 import { Subscription }                 from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/map';
@@ -27,6 +27,12 @@ export class EksiLeftsideComponent {
   }
 
   ngOnInit(): void {
+    this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+            return;
+        }
+        document.body.scrollTop = 0;
+    });
     this.sub = this.route.params
        .subscribe(params => {
           if(params != null){

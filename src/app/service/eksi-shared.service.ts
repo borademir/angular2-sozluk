@@ -22,7 +22,7 @@ export class EksiSharedService {
       data => this.sessionbean.topicsCurrentPage = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
-        console.log("the subscription is completed " + this.sessionbean.topicsCurrentPage.contentList + " topics loaded..");
+        console.log("the subscription is completed topics loaded..");
         this.sessionbean.topicsTypeDescription = pTopicsTypeDescription;
       }
 
@@ -41,7 +41,7 @@ export class EksiSharedService {
       () => {
         console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
         console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
-        console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
+        //console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
       }
 
     );
@@ -55,7 +55,7 @@ export class EksiSharedService {
       () => {
         console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
         console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
-        console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
+        //console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
       }
 
     );

@@ -61,6 +61,33 @@
                 </div>
 
             </div>
+
+            <div class="container-fluid" [hidden]="eksiciSharedService.sessionbean.currentTopic.errorText == null">
+                <div class="page-header">
+
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <div class="huge">{{eksiciSharedService.sessionbean.currentTopic.errorText}}</div>
+                                    <div></div>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <i class="fa fa-comments fa-5x"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer" [hidden]="eksiciSharedService.sessionbean.currentTopic.suggestedTopicList == null">
+                            <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.currentTopic.suggestedTopicList">
+                                <a [routerLink]="[eksiciSharedService.getEntryRouterLink(topic.href)]"  routerLinkActive="active">
+                                    <i class="fa fa-paw fa-fw"></i>{{topic.topicText}}</a>
+                            </template>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
         </td>
     </tr>
 </table>

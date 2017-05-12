@@ -12,6 +12,8 @@ export class Topic {
     nextPageHref        : string     = '';
     pageList            : PageInfo[] = null;
     currentEntryPage    : number     = 0;
+    suggestedTopicList  : Topic[]    = null;
+    errorText           : string     = null;
 
     constructor(values: Object = {}){
         Object.assign(this,values)

@@ -44,6 +44,15 @@ export class EksiciService {
     return resp;
   }
 
+  getEntry (pEntryId: String): Observable<Topic> {
+    console.log('get entry baslar');
+    let resp: Observable<Topic> = this.http.get(this.apiBaseUrl + 'entry/' + pEntryId)
+                    .map((response: Response) => <Topic>response.json())
+                    .catch(this.handleError);
+    console.log('get entry biter');
+    return resp;
+  }
+
   private extractData(res: Response) {
     let body = res.json();
     console.log(body);

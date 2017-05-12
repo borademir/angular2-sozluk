@@ -20,6 +20,20 @@ const appRoutes: Routes = [
     path: 'topic/entries/:topicHref'          , 
     component: EksiLeftsideComponent ,
     data: {
+      type:  'topic'
+    }
+  },
+  { 
+    path: ''          , 
+    component: EksiLeftsideComponent ,
+    data: {
+      type:  'see'
+    }
+  },
+  { 
+    path: 'entry/:entryId'          , 
+    component: EksiLeftsideComponent ,
+    data: {
       type:  'entry'
     }
   },
@@ -71,8 +85,8 @@ const appRoutes: Routes = [
     data: {
       type:  'channel'
     }
-  },
-  { path: '**', redirectTo: '/today', pathMatch: 'full' }
+  }
+  ,{ path: '**', redirectTo: '/today', pathMatch: 'full' }
 ];
 
 @NgModule({

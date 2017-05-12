@@ -40,7 +40,16 @@ export class EksiLeftsideComponent {
               this.openTopicEntries(params['topicHref']);
             }
           }
+      });
 
+    this.sub = this.route.queryParams
+       .subscribe(queryParams => {
+          if(queryParams != null){
+            if(queryParams['q'] != null ){
+              console.log('see:' + queryParams['q']);
+              this.openTopicEntries('?q=' + queryParams['q']);
+            }
+          }
       });
       
     if(this.route.snapshot.data['type']){
@@ -53,15 +62,20 @@ export class EksiLeftsideComponent {
             );
         }else if(this.route.snapshot.data['type'] == 'channel'){
           this.navigateToChannel(this.route.snapshot.params['channelname']);
-        }else if(this.route.snapshot.data['type'] == 'entry'){
+        }else if(this.route.snapshot.data['type'] == 'topic'){
           this.openTopicEntries(this.route.snapshot.params['topicHref']);
-          
-        }        
+        }else if(this.route.snapshot.data['type'] == 'entry'){
+          this.openEntry(this.route.snapshot.params['entryId']);
+        }else if(this.route.snapshot.data['type'] == 'see'){
+          console.log('typ see:' + this.route.snapshot.queryParams['q']);
+        }         
     }else{
+      console.log('else executed');
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
     
     if(this.eksiciSharedService.sessionbean.topicsCurrentPage.contentList == null){
+      console.log('left defaults');
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
     
@@ -80,5 +94,8 @@ export class EksiLeftsideComponent {
     this.eksiciSharedService.loadTopicEntriesAsync(pHref);
   }
 
-
+  openEntry(pEntryId: String) {
+    console.log(pEntryId + ' clicked..');
+    this.eksiciSharedService.loadEntry(pEntryId);
+  }
 }

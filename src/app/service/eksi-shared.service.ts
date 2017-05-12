@@ -47,6 +47,19 @@ export class EksiSharedService {
     );
   }
 
+  loadEntry(pEntryId: String) {
+    console.log('loading entry');
+    this.eksiciService.getEntry(pEntryId).subscribe(
+      data => this.sessionbean.currentTopic = data,
+      error => this.sessionbean.errorMessage = <any>error,
+      () => {
+        console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
+        console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
+        console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
+      }
+
+    );
+  }
   getChannelInfoByName(pChannelName: String): Channel {
     for(let i = 0; i < this.sessionbean.channels.length; ++i) {
       let current = this.sessionbean.channels[i];  

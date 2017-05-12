@@ -10,8 +10,9 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class EksiciService {
-  private apiBaseUrl = 'http://localhost:8080/v1/';  // URL to web API
-  private apiBaseUrl_eksici = 'http://www.ekcisi.com/api/v1/';  // URL to web API
+  private apiBaseUrl_local = 'http://localhost:8080/v1/';  // URL to web API
+  private apiBaseUrl_domain = 'http://www.ekcisi.com/api/v1/';  // URL to web API
+  private apiBaseUrl = 'http://139.162.163.241:8080/api/v1/';
   
   constructor (private http: Http) {}
 

@@ -1,6 +1,6 @@
 import { Angular2CliTestPage } from './app.po';
 
-describe('angular2-cli-test App', () => {
+describe('angular2-sozluk App', () => {
   let page: Angular2CliTestPage;
 
   beforeEach(() => {

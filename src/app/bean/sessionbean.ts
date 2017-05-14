@@ -14,6 +14,9 @@ export class SessionBean {
     currentTopic: Topic = new Topic();
     errorMessage: String;
 
+    clientWidth: number = 0;
+    renderTopicList: boolean = true;
+
     constructor(values: Object = {}) {
         Object.assign(this, values)
     }

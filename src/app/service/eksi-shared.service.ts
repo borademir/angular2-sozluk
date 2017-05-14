@@ -74,4 +74,6 @@ export class EksiSharedService {
    let routerLink = "/topic/entries/"+pTopicHref;
    return routerLink;
   }  
+
+
 }

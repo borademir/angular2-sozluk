@@ -1,7 +1,7 @@
 <table style="width:100%;height: 100%;">
     <tr valign="top">
         <td width="100%">
-            <div class="container-fluid" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
+            <div [ngClass]="{'container-fluid' : !eksiciSharedService.sessionbean.mobile}" [hidden]="eksiciSharedService.sessionbean.currentTopic.entryList == null">
                 <div class="page-header">
 
                     <div class="panel panel-info">

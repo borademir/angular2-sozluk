@@ -15,7 +15,6 @@ export class SessionBean {
     errorMessage: String;
 
     clientWidth: number = 0;
-    mobile: boolean = false;
     renderTopicList: boolean = true;
     loading: boolean = true;
 
@@ -35,6 +34,10 @@ export class SessionBean {
             return 4;
         }
         return 15;
+    }
+
+    get mobile(){
+        return this.clientWidth<800;
     }
     
 }

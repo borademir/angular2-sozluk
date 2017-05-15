@@ -84,5 +84,9 @@ export class EksiSharedService {
    return routerLink;
   }
 
+  getEntryIdRouterLink(pEntryId: number){
+   let routerLink = "/entry/"+pEntryId;
+   return routerLink;
+  } 
 
 }

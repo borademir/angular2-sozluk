@@ -19,6 +19,9 @@ export class Topic {
     niceTodayHref       : string     = null;
     pageNumberlist      : number[]   = null;
     pagingHrefTemplate  : string     = null;
+    beforeEntries       : Topic      = null;
+    afterEntries        : Topic      = null;
+
     constructor(values: Object = {}){
         Object.assign(this,values)
     }

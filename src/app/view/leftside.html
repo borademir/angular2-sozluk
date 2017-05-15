@@ -44,7 +44,16 @@
                                 [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
                             Son Sayfa
                         </button>
+
+
                     </div>
+                    <hr/>
+                    <button *ngIf="eksiciSharedService.sessionbean.currentTopic.beforeEntries != null" style="width: 100%"
+                                class="btn btn-yellow btn-xs"
+                                [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.beforeEntries.href)]"  
+                                routerLinkActive="active">
+                                {{eksiciSharedService.sessionbean.currentTopic.beforeEntries.topicText}}
+                    </button>
 
                 </div>
 
@@ -55,12 +64,22 @@
                         </div>
                         <div class="panel-body" [innerHtml]="entry.entryHtml"></div>
                         <div class="panel-footer">
-                                <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
+                                <a [routerLink]="[eksiciSharedService.getEntryIdRouterLink(entry.entryId)]"  
+                                    routerLinkActive="active">
+                                    <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
+                                </a>
                                 <span class="badge" *ngIf="entry.favoriteCount > 0">{{entry.favoriteCount}}</span>
                         </div>
                     </div>
                 </template>
 
+                <hr/>
+                <button *ngIf="eksiciSharedService.sessionbean.currentTopic.afterEntries != null" style="width: 100%"
+                            class="btn btn-yellow btn-xs"
+                            [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.afterEntries.href)]"  
+                            routerLinkActive="active">
+                            {{eksiciSharedService.sessionbean.currentTopic.afterEntries.topicText}}
+                </button>
                 <div class="text-center">
                     <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage>1 && 1<=eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15"
                             class="btn btn-primary btn-xs"
@@ -81,7 +100,6 @@
                         Son Sayfa
                     </button>
                 </div>
-
             </div>
 
             <div class="container-fluid" [hidden]="eksiciSharedService.sessionbean.currentTopic.errorText == null">

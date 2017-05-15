@@ -14,6 +14,8 @@ export class Topic {
     currentEntryPage    : number     = 0;
     suggestedTopicList  : Topic[]    = null;
     errorText           : string     = null;
+    niceAllHref         : string     = null;
+    niceTodayHref       : string     = null;
 
     constructor(values: Object = {}){
         Object.assign(this,values)

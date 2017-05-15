@@ -19,7 +19,9 @@
                         <div class="panel-footer">
                             <a class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
                             <a class="btn btn-social-icon btn-twitter"><i class="fa fa-twitter"></i></a>
-                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Şükela:  tümü | bugün  başlıkta ara</small>
+                            <small class="text-muted"><i class="glyphicon glyphicon-time"></i> Şükela:  
+                            <a [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.niceAllHref)]"  routerLinkActive="active">tümü</a> | 
+                            <a [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.niceTodayHref)]"  routerLinkActive="active">bugün</a>  başlıkta ara</small>
                         </div>
                     </div>
 

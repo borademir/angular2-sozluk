@@ -7,6 +7,7 @@ import { TypeaheadMatch }          from 'ngx-bootstrap/typeahead';
 import { Observable }              from 'rxjs/Observable';
 import { AutoComplete }            from '../model/autocomplete';
 import { Topic }                   from '../model/topic';
+import { Router, ActivatedRoute } from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
@@ -25,6 +26,8 @@ export class TopicListComponent {
 
   constructor(
     private eksiciService: EksiciService,
+    private route: ActivatedRoute,
+    private router: Router,
     private eksiciSharedService : EksiSharedService) {
           this.dataSource = Observable
             .create((observer: any) => {
@@ -47,6 +50,7 @@ export class TopicListComponent {
   }
  
   public typeaheadOnSelect(e: TypeaheadMatch): void {
+    this.router.navigate([this.eksiciSharedService.getEntryRouterLink(e.item.href)]);
     console.log('Selected value: ', e.item.topicText);
   }
 

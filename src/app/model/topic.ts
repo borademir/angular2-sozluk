@@ -17,8 +17,10 @@ export class Topic {
     errorText           : string     = null;
     niceAllHref         : string     = null;
     niceTodayHref       : string     = null;
-
+    pageNumberlist      : number[]   = null;
+    pagingHrefTemplate  : string     = null;
     constructor(values: Object = {}){
         Object.assign(this,values)
     }
+
 }

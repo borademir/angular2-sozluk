@@ -28,20 +28,20 @@
                     <div class="text-center">
                         <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage>1 && 1<=eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15"
                                 class="btn btn-primary btn-xs"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.pageList[0].pageHref)]">
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]">
                             İlk Sayfa
                         </button>
-                        <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
+                        <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
                             <button type="button" *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 "
-                                    [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page.pageNumber , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber}"
-                                    [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"
-                                    [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber">
-                                {{page.pageNumber}}
+                                    [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page}"
+                                    [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page)]"
+                                    [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page">
+                                {{page}}
                             </button>
                         </template>
                         <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage != eksiciSharedService.sessionbean.currentTopic.totalEntryPage && eksiciSharedService.sessionbean.currentTopic.totalEntryPage >eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15"
                                 class="btn btn-primary btn-xs"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.pageList[eksiciSharedService.sessionbean.currentTopic.totalEntryPage-1].pageHref)]">
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
                             Son Sayfa
                         </button>
                     </div>
@@ -64,20 +64,20 @@
                 <div class="text-center">
                     <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage>1 && 1<=eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15"
                             class="btn btn-primary btn-xs"
-                            [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.pageList[0].pageHref)]">
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]">
                         İlk Sayfa
                     </button>
-                    <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageList">
+                    <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
                         <button type="button" *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 "
-                                [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page.pageNumber , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber}"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLink(page.pageHref)]"
-                                [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page.pageNumber">
-                            {{page.pageNumber}}
+                                [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page}"
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page)]"
+                                [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page">
+                            {{page}}
                         </button>
                     </template>
                     <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage != eksiciSharedService.sessionbean.currentTopic.totalEntryPage && eksiciSharedService.sessionbean.currentTopic.totalEntryPage >eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15"
                             class="btn btn-primary btn-xs"
-                            [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.pageList[eksiciSharedService.sessionbean.currentTopic.totalEntryPage-1].pageHref)]">
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
                         Son Sayfa
                     </button>
                 </div>

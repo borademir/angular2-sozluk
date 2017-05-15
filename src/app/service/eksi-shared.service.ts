@@ -41,6 +41,10 @@ export class EksiSharedService {
       () => {
         console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
         console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
+        this.sessionbean.currentTopic.pageNumberlist = Array(this.sessionbean.currentTopic.totalEntryPage);
+        for(let i=0;i<this.sessionbean.currentTopic.totalEntryPage;i++){
+          this.sessionbean.currentTopic.pageNumberlist[i] = i+1;
+        }
         //console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
       }
 
@@ -74,6 +78,11 @@ export class EksiSharedService {
    let routerLink = "/topic/entries/"+pTopicHref;
    return routerLink;
   }  
+
+  getEntryRouterLinkFromTemplate(pTopic: Topic , pPageNumber: number){
+   let routerLink = "/topic/entries/"+pTopic.pagingHrefTemplate + pPageNumber;
+   return routerLink;
+  }
 
 
 }

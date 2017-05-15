@@ -12,12 +12,12 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class EksiciService {
-  private apiBaseUrl_local  = 'http://localhost:8080/v1/';  
+  private apiBaseUrl_local  = 'http://localhost:8080/api/v1/';  
   private apiBaseUrl_domain = 'http://www.ekcisi.com/api/v1/';  
   private apiBaseUrl_heroku = 'https://eksici-api.herokuapp.com/api/v1/';
   private apiBaseUrl_ip     = 'http://139.162.163.241:8080/api/v1/';
 
-  private apiBaseUrl        = this.apiBaseUrl_ip;
+  private apiBaseUrl        = this.apiBaseUrl_local;
   
   constructor (private http: Http) {}
 
@@ -51,7 +51,7 @@ export class EksiciService {
 
   getTopicEntries (pHref: String): Observable<Topic> {
     console.log('get topic entries baslar');
-    let resp: Observable<Topic> = this.http.get(this.apiBaseUrl + 'topics/entries?topicsHref=' + pHref)
+    let resp: Observable<Topic> = this.http.get(this.apiBaseUrl + 'topic/entries?topicsHref=' + pHref) // paging template gecisi
                     .map((response: Response) => <Topic>response.json())
                     .catch(this.handleError);
     console.log('get topic entries biter');

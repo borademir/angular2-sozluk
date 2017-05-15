@@ -58,7 +58,7 @@
                 </div>
 
                 <template ngFor let-i="index" let-c="count" let-entry [ngForOf]="eksiciSharedService.sessionbean.currentTopic.entryList">
-                    <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" >
+                    <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" [id]="entry.entryId">
                         <div class="panel-heading">
                             <span>{{entry.suser.entryAuthor}}</span>
                         </div>

@@ -21,6 +21,7 @@ export class Topic {
     pagingHrefTemplate  : string     = null;
     beforeEntries       : Topic      = null;
     afterEntries        : Topic      = null;
+    focusTo             : string     = null;
 
     constructor(values: Object = {}){
         Object.assign(this,values)

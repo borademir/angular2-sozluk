@@ -45,6 +45,10 @@ export class EksiSharedService {
         for(let i=0;i<this.sessionbean.currentTopic.totalEntryPage;i++){
           this.sessionbean.currentTopic.pageNumberlist[i] = i+1;
         }
+        console.log('scrolling..');
+        if(this.sessionbean.currentTopic.focusTo != null){
+          document.getElementById(this.sessionbean.currentTopic.focusTo).scrollIntoView();
+        }
         //console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
       }
 

@@ -1,10 +1,10 @@
 <ul class="nav navbar-top-links navbar-right">
     <li class="active"><a routerLink="/today" routerLinkActive="active">bugün</a></li>
     <li><a routerLink="/popular" routerLinkActive="active">gündem</a></li>                
-    <li><a routerLink="/todayinhistory/2015" routerLinkActive="active">tarihte bugün</a></li>
+    <li *ngIf="!eksiciSharedService.sessionbean.mobile"><a routerLink="/todayinhistory/2015" routerLinkActive="active">tarihte bugün</a></li>
     
     <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
-        <li *ngIf="i<10">
+        <li *ngIf="i<eksiciSharedService.sessionbean.channelOffset">
             <a [routerLink]="[getChannellRouterLink(channel)]"  routerLinkActive="active">{{channel.name}}</a>
         </li>
     </template>
@@ -12,7 +12,7 @@
     <li dropdown><a href="#" dropdownToggle>...</a>
         <ul dropdownMenu role="menu" aria-labelledby="single-button">
             <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
-                <li *ngIf="i>10">
+                <li *ngIf="i>eksiciSharedService.sessionbean.channelOffset-1">
                     <a [routerLink]="[getChannellRouterLink(channel)]" routerLinkActive="active">{{channel.name}}</a>
                 </li>
             </template>
@@ -22,7 +22,7 @@
     </li>
     <li><a routerLink="/videos" routerLinkActive="active">videolar</a></li>
 
-    <li dropdown>
+    <li dropdown *ngIf=false> 
         <a dropdownToggle data-toggle="dropdown" href="#">
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>

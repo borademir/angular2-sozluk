@@ -67,11 +67,13 @@ export class EksiLeftsideComponent {
     if(this.route.snapshot.data['type']){
         if(this.route.snapshot.data['type'] == 'classic'){
           this.eksiciSharedService.loadTopicsAsync(this.route.snapshot.data['href'], this.route.snapshot.data['title']);
+          this.eksiciSharedService.isCollapsed=false;
         }else if(this.route.snapshot.data['type'] == 'history'){
           this.eksiciSharedService.loadTopicsAsync(
             this.route.snapshot.data['href'] + this.route.snapshot.params['year'], 
             this.route.snapshot.data['title'] + '(' + this.route.snapshot.params['year'] + ')'
             );
+            this.eksiciSharedService.isCollapsed=false;
         }else if(this.route.snapshot.data['type'] == 'channel'){
           this.navigateToChannel(this.route.snapshot.params['channelname']);
         }else if(this.route.snapshot.data['type'] == 'topic'){
@@ -99,16 +101,19 @@ export class EksiLeftsideComponent {
       if(targetChannel != null){
         this.eksiciSharedService.loadTopicsAsync('channels/topics?topicsHref=' + targetChannel.href,targetChannel.name);
       }
+      this.eksiciSharedService.isCollapsed=false;
   }
 
   openTopicEntries(pHref: String) {
     console.log(pHref + ' clicked..');
     this.eksiciSharedService.loadTopicEntriesAsync(pHref);
+    this.eksiciSharedService.isCollapsed=true;
   }
 
   openEntry(pEntryId: String) {
     console.log(pEntryId + ' clicked..');
     this.eksiciSharedService.loadEntry(pEntryId);
+    this.eksiciSharedService.isCollapsed=true;
   }
 
     // Shows and hides the loading spinner during RouterEvent changes
@@ -137,8 +142,9 @@ export class EksiLeftsideComponent {
         }
     }
 
-  clicked(event) {
+  refresh(event) {
      console.log('sacma sapan click');
+     location.reload();
   }
 
 }

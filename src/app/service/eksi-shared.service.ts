@@ -9,6 +9,7 @@ import { Channel }                 from '../model/channel';
 export class EksiSharedService {
 
   sessionbean: SessionBean = new SessionBean();
+  public isCollapsed: boolean = false;
 
   constructor(
     private eksiciService: EksiciService,

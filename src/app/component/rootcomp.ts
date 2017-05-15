@@ -14,6 +14,11 @@ export class AppComponent implements OnInit {
   errorMessage: string;
   constructor(
     private eksiciSharedService : EksiSharedService) {
+      if(this.eksiciSharedService.sessionbean.clientWidth<800){
+        this.eksiciSharedService.isCollapsed = true;
+        this.eksiciSharedService.sessionbean.mobile = true;
+        console.log('client width is smaller than 800');
+      }
   }
 
     ngOnInit(): void {

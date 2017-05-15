@@ -15,10 +15,26 @@ export class SessionBean {
     errorMessage: String;
 
     clientWidth: number = 0;
+    mobile: boolean = false;
     renderTopicList: boolean = true;
     loading: boolean = true;
 
     constructor(values: Object = {}) {
         Object.assign(this, values)
     }
+
+    get channelOffset(){
+        if(this.mobile){
+            return 0;
+        }
+        return 10;
+    }
+
+    get pagingOffset(){
+        if(this.mobile){
+            return 4;
+        }
+        return 15;
+    }
+    
 }

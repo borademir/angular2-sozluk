@@ -55,4 +55,9 @@ export class TopicListComponent {
     console.log('Selected value: ', e.item.topicText);
   }
 
+  refresh(event) {
+     console.log('sacma sapan click');
+     location.reload();
+  }
+  
 }

@@ -16,6 +16,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
+import { CollapseDirective } from 'ng2-bootstrap'
 // RECOMMENDED (doesn't work with system.js)
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
@@ -110,7 +111,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,EksiMenuBarComponent,EksiLeftsideComponent, TopicListComponent
+    AppComponent,EksiMenuBarComponent,EksiLeftsideComponent, TopicListComponent,CollapseDirective
   ],
   imports: [
     BrowserModule,

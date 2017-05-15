@@ -4,5 +4,9 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false
+  production        : false,
+  apiBaseUrl_local        : 'http://localhost:8080/api/v1/',
+  apiBaseUrl_domain : 'http://www.ekcisi.com/api/v1/',
+  apiBaseUrl_heroku : 'https://eksici-api.herokuapp.com/api/v1/',
+  apiBaseUrl     : 'http://139.162.163.241:8080/api/v1/'
 };

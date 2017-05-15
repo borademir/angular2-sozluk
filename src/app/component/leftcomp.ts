@@ -36,7 +36,7 @@ export class EksiLeftsideComponent {
         }
         this.eksiciSharedService.sessionbean.clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         console.log('scrolling to top width client width :' + this.eksiciSharedService.sessionbean.clientWidth);
-        this.eksiciSharedService.sessionbean.topicsTypeDescription = 'w:' + this.eksiciSharedService.sessionbean.clientWidth;
+        //this.eksiciSharedService.sessionbean.topicsTypeDescription = 'w:' + this.eksiciSharedService.sessionbean.clientWidth;
         document.body.scrollTop = 0;
     });
     this.sub = this.route.params
@@ -139,7 +139,6 @@ export class EksiLeftsideComponent {
 
   clicked(event) {
      console.log('sacma sapan click');
-     this.eksiciSharedService.sessionbean.topicsTypeDescription = 'huu';
   }
 
 }

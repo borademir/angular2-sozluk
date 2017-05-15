@@ -36,7 +36,7 @@ export class EksiciService {
     let resp: Observable<Topic[]> = this.http.get(this.apiBaseUrl + 'autocomplete?query=' + pQueryString)
                     .map((response: Response) => response.json().topicList as Topic[])
                     .catch(this.handleError);
-    console.log('get autocomplete biter:' + resp);
+    console.log('get autocomplete biter:' + pQueryString);
     return resp;
   }
 

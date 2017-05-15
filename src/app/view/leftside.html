@@ -32,7 +32,11 @@
                             İlk Sayfa
                         </button>
                         <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
-                            <button type="button" *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 "
+                            <button type="button" 
+                                   *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 
+                                       && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 
+                                       && eksiciSharedService.sessionbean.currentTopic.totalEntryPage>1
+                                       "
                                     [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page}"
                                     [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page)]"
                                     [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page">
@@ -73,13 +77,14 @@
                     </div>
                 </template>
 
-                <hr/>
+                
                 <button *ngIf="eksiciSharedService.sessionbean.currentTopic.afterEntries != null" style="width: 100%"
                             class="btn btn-yellow btn-xs"
                             [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.afterEntries.href)]"  
                             routerLinkActive="active">
                             {{eksiciSharedService.sessionbean.currentTopic.afterEntries.topicText}}
                 </button>
+                <hr/>
                 <div class="text-center">
                     <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage>1 && 1<=eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15"
                             class="btn btn-primary btn-xs"
@@ -87,7 +92,11 @@
                         İlk Sayfa
                     </button>
                     <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
-                        <button type="button" *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 "
+                        <button type="button" 
+                                *ngIf="i>eksiciSharedService.sessionbean.currentTopic.currentEntryPage-15 
+                                    && i<eksiciSharedService.sessionbean.currentTopic.currentEntryPage+15 
+                                    && eksiciSharedService.sessionbean.currentTopic.totalEntryPage>1
+                                    "
                                 [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page}"
                                 [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page)]"
                                 [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page">

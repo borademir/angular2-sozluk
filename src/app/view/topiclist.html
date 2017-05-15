@@ -1,7 +1,21 @@
 <ul class="nav" id="side-menu">
     <li class="sidebar-search">
         <div class="input-group custom-search-form">
-            <input type="text" class="form-control" placeholder="başlık, #entry ya da @yazar">
+            <input [(ngModel)]="asyncSelected"
+                    [typeahead]="dataSource"
+                    (typeaheadLoading)="changeTypeaheadLoading($event)"
+                    (typeaheadNoResults)="changeTypeaheadNoResults($event)"
+                    (typeaheadOnSelect)="typeaheadOnSelect($event)"
+                    typeaheadOptionsLimit="17"
+                    typeaheadOptionField="topicText"
+                    placeholder="başlık, #entry ya da @yazar"
+                    class="form-control">
+            <div *ngIf="typeaheadLoading===true">
+                <i class="glyphicon glyphicon-refresh ng-hide" style=""></i>
+            </div>
+            <div *ngIf="typeaheadNoResults===true" class="" style="">
+                <i class="glyphicon glyphicon-remove"></i> No Results Found
+            </div>
             <span class="input-group-btn">
             <button class="btn btn-default" type="button">
                 <i class="fa fa-search"></i>
@@ -25,4 +39,8 @@
         </template>
     </li>
 </ul>
+<pre class="card card-block card-header">Model: {{selected | json}}</pre>
+<input [(ngModel)]="selected"
+       [typeahead]="states"
+       class="form-control">
 

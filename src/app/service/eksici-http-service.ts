@@ -2,17 +2,22 @@ import { Injectable }              from '@angular/core';
 import { Http, Response }          from '@angular/http';
 import { Observable }              from 'rxjs/Observable';
 import { Channel }                 from '../model/channel';
-import { TopicPager} from '../model/topicpager';
-import { Topic } from '../model/topic';
+import { TopicPager}               from '../model/topicpager';
+import { Topic }                   from '../model/topic';
+import { AutoComplete }            from '../model/autocomplete';
+
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
 
 @Injectable()
 export class EksiciService {
-  private apiBaseUrl_local = 'http://localhost:8080/v1/';  // URL to web API
-  private apiBaseUrl_domain = 'http://www.ekcisi.com/api/v1/';  // URL to web API
-  private apiBaseUrl = 'http://139.162.163.241:8080/api/v1/';
+  private apiBaseUrl_local  = 'http://localhost:8080/v1/';  
+  private apiBaseUrl_domain = 'http://www.ekcisi.com/api/v1/';  
+  private apiBaseUrl_heroku = 'https://eksici-api.herokuapp.com/api/v1/';
+  private apiBaseUrl_ip     = 'http://139.162.163.241:8080/api/v1/';
+
+  private apiBaseUrl        = this.apiBaseUrl_ip;
   
   constructor (private http: Http) {}
 
@@ -22,10 +27,18 @@ export class EksiciService {
                    // .map(this.extractData)
                     .map((response: Response) => <Channel[]>response.json())
                     .catch(this.handleError);
-    console.log('get channels biter');
+    console.log('get channels biter:' + resp);
     return resp;
   }
 
+  autocomplete (pQueryString: String): Observable<Topic[]> {
+    console.log('get autocomplete baslar');
+    let resp: Observable<Topic[]> = this.http.get(this.apiBaseUrl + 'autocomplete?query=' + pQueryString)
+                    .map((response: Response) => response.json().topicList as Topic[])
+                    .catch(this.handleError);
+    console.log('get autocomplete biter:' + resp);
+    return resp;
+  }
 
   getTopics (pTopicType: String): Observable<TopicPager> {
     console.log('get topics baslar');
@@ -60,7 +73,7 @@ export class EksiciService {
     return body.data ;
   }
   private handleError (error: Response | any) {
-    // In a real world app, you might use a remote logging infrastructure
+    
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
@@ -69,7 +82,7 @@ export class EksiciService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    console.error(errMsg);
+    console.error('HTTP Service : ' + errMsg);
     return Observable.throw(errMsg);
   }
 }

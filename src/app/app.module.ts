@@ -16,6 +16,8 @@ import { EksiciService } from './service/eksici-http-service';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
+// RECOMMENDED (doesn't work with system.js)
+import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
  let config = {
     breakPoints: {
@@ -118,7 +120,8 @@ const appRoutes: Routes = [
     NgbModule.forRoot(),
     DropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
-    ResponsiveModule
+    ResponsiveModule,
+    TypeaheadModule.forRoot()
   ],
   providers: [
     EksiSharedService,

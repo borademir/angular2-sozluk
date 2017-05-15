@@ -47,7 +47,7 @@ export class TopicListComponent {
   }
  
   public typeaheadOnSelect(e: TypeaheadMatch): void {
-    console.log('Selected value: ', e.value);
+    console.log('Selected value: ', e.item.topicText);
   }
 
 }

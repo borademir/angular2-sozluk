@@ -36,8 +36,8 @@
         </template>
     </li>
 </ul>
-<button type="button" class="btn btn-primary" (click)="staticModal.show()" [hidden]="true" id="waitingDialogOpenerButton">open</button>
-<button type="button" class="btn btn-primary" (click)="staticModal.hide()" [hidden]="true" id="waitingDialogCloserButton">close</button>
+<button type="button" class="btn btn-primary" (click)="staticModal.show()" style="display: none;" id="waitingDialogOpenerButton">open</button>
+<button type="button" class="btn btn-primary" (click)="staticModal.hide()" style="display: none;" id="waitingDialogCloserButton">close</button>
 <div class="modal fade" bsModal #staticModal="bs-modal" [config]="{backdrop: 'static'}"
      tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-sm">

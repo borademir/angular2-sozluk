@@ -116,20 +116,30 @@ export class EksiLeftsideComponent {
         if (event instanceof NavigationStart) {
             console.log('loading true');
             this.eksiciSharedService.sessionbean.loading = true;
+            document.getElementById('waitingDialogOpenerButton').click();
         }
         if (event instanceof NavigationEnd) {
             console.log('loading false');
             this.eksiciSharedService.sessionbean.loading = false;
+            document.getElementById('waitingDialogCloserButton').click();
         }
 
         // Set loading state to false in both of the below events to hide the spinner in case a request fails
         if (event instanceof NavigationCancel) {
             console.log('loading false');
             this.eksiciSharedService.sessionbean.loading = false;
+            document.getElementById('waitingDialogCloserButton').click();
         }
         if (event instanceof NavigationError) {
             console.log('loading false');
             this.eksiciSharedService.sessionbean.loading = false;
+            document.getElementById('waitingDialogCloserButton').click();
         }
     }
+
+  clicked(event) {
+     console.log('sacma sapan click');
+     this.eksiciSharedService.sessionbean.topicsTypeDescription = 'huu';
+  }
+
 }

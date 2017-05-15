@@ -14,7 +14,7 @@ import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes } from '@angular/router';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
 // RECOMMENDED (doesn't work with system.js)
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
@@ -122,7 +122,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     ResponsiveModule,
     TypeaheadModule.forRoot(),
-    ProgressbarModule.forRoot()
+    ProgressbarModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     EksiSharedService,

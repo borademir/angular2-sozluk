@@ -16,6 +16,7 @@ export class SessionBean {
 
     clientWidth: number = 0;
     renderTopicList: boolean = true;
+    loading: boolean = true;
 
     constructor(values: Object = {}) {
         Object.assign(this, values)

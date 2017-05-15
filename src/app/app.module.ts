@@ -12,7 +12,7 @@ import { TopicListComponent} from './component/topiclistcomp';
 import { EksiLeftsideComponent} from './component/leftcomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
-
+import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes } from '@angular/router';
 
 import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
@@ -121,7 +121,8 @@ const appRoutes: Routes = [
     DropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     ResponsiveModule,
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
+    ProgressbarModule.forRoot()
   ],
   providers: [
     EksiSharedService,

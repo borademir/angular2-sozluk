@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TopicPager } from '../model/topicpager';
 import {Topic} from '../model/topic';
 import { EksiSharedService } from '../service/eksi-shared.service';
-import { Router, ActivatedRoute, Params, Data , NavigationEnd } from '@angular/router';
+import { Router, ActivatedRoute, Params, Data , NavigationEnd , Event as RouterEvent, NavigationStart,NavigationCancel, NavigationError } from '@angular/router';
 import { Subscription }                 from 'rxjs/Subscription';
 
 import 'rxjs/add/operator/map';
@@ -24,6 +24,9 @@ export class EksiLeftsideComponent {
     private router: Router
   ) {
     console.log(route);
+    router.events.subscribe((event: RouterEvent) => {
+            this.navigationInterceptor(event);
+    });
   }
 
   ngOnInit(): void {
@@ -107,4 +110,26 @@ export class EksiLeftsideComponent {
     console.log(pEntryId + ' clicked..');
     this.eksiciSharedService.loadEntry(pEntryId);
   }
+
+    // Shows and hides the loading spinner during RouterEvent changes
+    navigationInterceptor(event: RouterEvent): void {
+        if (event instanceof NavigationStart) {
+            console.log('loading true');
+            this.eksiciSharedService.sessionbean.loading = true;
+        }
+        if (event instanceof NavigationEnd) {
+            console.log('loading false');
+            this.eksiciSharedService.sessionbean.loading = false;
+        }
+
+        // Set loading state to false in both of the below events to hide the spinner in case a request fails
+        if (event instanceof NavigationCancel) {
+            console.log('loading false');
+            this.eksiciSharedService.sessionbean.loading = false;
+        }
+        if (event instanceof NavigationError) {
+            console.log('loading false');
+            this.eksiciSharedService.sessionbean.loading = false;
+        }
+    }
 }

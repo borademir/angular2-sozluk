@@ -51,6 +51,7 @@ export class TopicListComponent {
  
   public typeaheadOnSelect(e: TypeaheadMatch): void {
     this.router.navigate([this.eksiciSharedService.getEntryRouterLink(e.item.href)]);
+    this.asyncSelected = '';
     console.log('Selected value: ', e.item.topicText);
   }
 

@@ -47,7 +47,7 @@ export class SessionBean {
         }else if(this.clientWidth<800){
             return 0;
         }
-        return 10;
+        return 7;
     }
 
     get pagingOffset(){

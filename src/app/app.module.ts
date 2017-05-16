@@ -16,7 +16,8 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
-import { SharedModule } from './shared.module'
+//import { SharedModule } from './shared.module'
+import { CollapseModule } from 'ng2-bootstrap/ng2-bootstrap'
 
 // RECOMMENDED (doesn't work with system.js)
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
@@ -127,7 +128,7 @@ const appRoutes: Routes = [
     TypeaheadModule.forRoot(),
     ProgressbarModule.forRoot(),
     ModalModule.forRoot(),
-    SharedModule
+    CollapseModule.forRoot()
   ],
   providers: [
     EksiSharedService,

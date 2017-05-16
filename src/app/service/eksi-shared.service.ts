@@ -18,6 +18,7 @@ export class EksiSharedService {
   }
 
   loadTopicsAsync(ptopicsType: String, pTopicsTypeDescription: String) {
+    //this.sessionbean.lastTopicTypeUrl = ptopicsType;
     console.log('loading topics');
     this.sessionbean.changeAsyncJobStatus(true);
     this.eksiciService.getTopics(ptopicsType).subscribe(

@@ -25,7 +25,11 @@ export class EksiLeftsideComponent {
   ) {
     console.log(route);
     router.events.subscribe((event: RouterEvent) => {
-            this.navigationInterceptor(event);
+        if(event.url.indexOf('topic/entries') < 0){
+          console.log('event.url from leftside:' + event.url);
+          this.eksiciSharedService.sessionbean.lastTopicTypeUrl = event.url;
+        }
+        this.navigationInterceptor(event);
     });
   }
 

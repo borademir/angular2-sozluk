@@ -19,6 +19,8 @@ export class SessionBean {
     showLoadingDiv: boolean = false;
     asyncJobWorking: boolean = false;
 
+    lastTopicTypeUrl: String = '';
+
     constructor(values: Object = {}) {
         Object.assign(this, values)
     }

@@ -56,7 +56,7 @@ export class TopicListComponent {
   }
 
   refresh(event) {
-     console.log('sacma sapan click');
+     console.log('sacma sapan click from topic list');
      location.reload();
   }
   

@@ -21,7 +21,8 @@
         </div>
     </li>
     <li>
-        <a (click)="refresh()"><i class="fa fa-refresh fa-fw"></i> {{eksiciSharedService.sessionbean.topicsTypeDescription}}</a>
+        <a [routerLink]="[eksiciSharedService.sessionbean.lastTopicTypeUrl]"  
+           routerLinkActive="active"><i class="fa fa-refresh fa-fw"></i> {{eksiciSharedService.sessionbean.topicsTypeDescription}}</a>
     </li>
     <li>
         <template ngFor let-i="index" let-c="count" let-topic [ngForOf]="eksiciSharedService.sessionbean.topicsCurrentPage.contentList">

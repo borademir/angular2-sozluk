@@ -7,7 +7,11 @@
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-9">
-                                    <div [ngClass]="{'large' : eksiciSharedService.sessionbean.mobile , 'huge' : !eksiciSharedService.sessionbean.mobile}">{{eksiciSharedService.sessionbean.currentTopic.topicText}}</div>
+                                    <div [ngClass]="{'large' : eksiciSharedService.sessionbean.mobile , 'huge' : !eksiciSharedService.sessionbean.mobile}">
+                                        <a [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.originalUrl),{tim:eksiciSharedService.timeInMiliseconds}]"  routerLinkActive="active">
+                                            {{eksiciSharedService.sessionbean.currentTopic.topicText}}
+                                        </a>
+                                    </div>
                                 </div>
                                 <div class="col-xs-3 text-right">
                                     <i [ngClass]="{'fa' : true , 'fa-comments' : true ,  'fa-3x' : eksiciSharedService.sessionbean.mobile , 'fa-5x' : !eksiciSharedService.sessionbean.mobile}" ></i>
@@ -66,7 +70,7 @@
                     </div>
                     <hr *ngIf="eksiciSharedService.sessionbean.currentTopic.beforeEntries != null" style="width: 100%"/>
                     <button *ngIf="eksiciSharedService.sessionbean.currentTopic.beforeEntries != null" style="width: 100%"
-                                class="btn btn-yellow btn-xs"
+                                class="btn btn-warning btn-sm"
                                 [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.beforeEntries.href)]"  
                                 routerLinkActive="active">
                                 {{eksiciSharedService.sessionbean.currentTopic.beforeEntries.topicText}}
@@ -92,7 +96,7 @@
 
                 
                 <button *ngIf="eksiciSharedService.sessionbean.currentTopic.afterEntries != null" style="width: 100%"
-                            class="btn btn-yellow btn-xs"
+                            class="btn btn-warning btn-sm"
                             [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.currentTopic.afterEntries.href)]"  
                             routerLinkActive="active">
                             {{eksiciSharedService.sessionbean.currentTopic.afterEntries.topicText}}

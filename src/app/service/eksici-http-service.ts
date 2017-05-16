@@ -17,48 +17,38 @@ export class EksiciService {
   constructor (private http: Http) {}
 
   getChannels (): Observable<Channel[]> {
-    console.log('get channels baslar');
     let resp: Observable<Channel[]> = this.http.get(environment.apiBaseUrl + 'channels')
                    // .map(this.extractData)
                     .map((response: Response) => <Channel[]>response.json())
                     .catch(this.handleError);
-    console.log('get channels biter:' + resp);
     return resp;
   }
 
   autocomplete (pQueryString: String): Observable<Topic[]> {
-    console.log('get autocomplete baslar');
     let resp: Observable<Topic[]> = this.http.get(environment.apiBaseUrl + 'autocomplete?query=' + pQueryString)
                     .map((response: Response) => response.json().topicList as Topic[])
                     .catch(this.handleError);
-    console.log('get autocomplete biter:' + pQueryString);
     return resp;
   }
 
   getTopics (pTopicType: String): Observable<TopicPager> {
-    console.log('get topics baslar');
     let resp: Observable<TopicPager> = this.http.get(environment.apiBaseUrl + pTopicType)
                     .map((response: Response) => <TopicPager>response.json())
                     .catch(this.handleError);
-    console.log('get topics biter');
     return resp;
   }
 
   getTopicEntries (pHref: String): Observable<Topic> {
-    console.log('get topic entries baslar');
     let resp: Observable<Topic> = this.http.get(environment.apiBaseUrl + 'topic/entries?topicsHref=' + pHref) // paging template gecisi
                     .map((response: Response) => <Topic>response.json())
                     .catch(this.handleError);
-    console.log('get topic entries biter');
     return resp;
   }
 
   getEntry (pEntryId: String): Observable<Topic> {
-    console.log('get entry baslar');
     let resp: Observable<Topic> = this.http.get(environment.apiBaseUrl + 'entry/' + pEntryId)
                     .map((response: Response) => <Topic>response.json())
-                    .catch(this.handleError);
-    console.log('get entry biter');
+                    .catch(this.handleError);    
     return resp;
   }
 

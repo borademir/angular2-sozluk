@@ -40,17 +40,17 @@ export class EksiSharedService {
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
-        console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
-        console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
+        console.log("the subscription is completed and current topic loaded..");
         this.sessionbean.currentTopic.pageNumberlist = Array(this.sessionbean.currentTopic.totalEntryPage);
         for(let i=0;i<this.sessionbean.currentTopic.totalEntryPage;i++){
           this.sessionbean.currentTopic.pageNumberlist[i] = i+1;
         }
-        console.log('scrolling..');
+        
         if(this.sessionbean.currentTopic.focusTo != null){
           document.getElementById(this.sessionbean.currentTopic.focusTo).scrollIntoView();
         }
-        //console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
+        console.log('scrolling..and true');
+        this.isCollapsed = true;
       }
 
     );
@@ -62,9 +62,7 @@ export class EksiSharedService {
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
-        console.log("the subscription is completed " + this.sessionbean.currentTopic.type);
-        console.log("the subscription is completed " + this.sessionbean.currentTopic.topicText);
-        //console.log("the subscription is completed " + this.sessionbean.currentTopic.entryList);
+        console.log("the subscription is completed and entry loaded..");
       }
 
     );

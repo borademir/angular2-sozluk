@@ -67,12 +67,14 @@ export class EksiLeftsideComponent {
     if(this.route.snapshot.data['type']){
         if(this.route.snapshot.data['type'] == 'classic'){
           this.eksiciSharedService.loadTopicsAsync(this.route.snapshot.data['href'], this.route.snapshot.data['title']);
+          console.log('false1');
           this.eksiciSharedService.isCollapsed=false;
         }else if(this.route.snapshot.data['type'] == 'history'){
           this.eksiciSharedService.loadTopicsAsync(
             this.route.snapshot.data['href'] + this.route.snapshot.params['year'], 
             this.route.snapshot.data['title'] + '(' + this.route.snapshot.params['year'] + ')'
             );
+            console.log('false2');
             this.eksiciSharedService.isCollapsed=false;
         }else if(this.route.snapshot.data['type'] == 'channel'){
           this.navigateToChannel(this.route.snapshot.params['channelname']);
@@ -94,7 +96,7 @@ export class EksiLeftsideComponent {
     }
 
     if(this.eksiciSharedService.sessionbean.currentTopic == null || this.eksiciSharedService.sessionbean.currentTopic.entryList == null){
-       console.log('current topic is null..');
+       console.log('false3');
       this.eksiciSharedService.isCollapsed = false;
     }
     
@@ -110,13 +112,13 @@ export class EksiLeftsideComponent {
   }
 
   openTopicEntries(pHref: String) {
-    console.log(pHref + ' clicked..');
+    console.log(pHref + ' true1..');
     this.eksiciSharedService.loadTopicEntriesAsync(pHref);
     this.eksiciSharedService.isCollapsed=true;
   }
 
   openEntry(pEntryId: String) {
-    console.log(pEntryId + ' clicked..');
+    console.log(pEntryId + ' true2..');
     this.eksiciSharedService.loadEntry(pEntryId);
     this.eksiciSharedService.isCollapsed=true;
   }
@@ -129,19 +131,16 @@ export class EksiLeftsideComponent {
             document.getElementById('waitingDialogOpenerButton').click();
         }
         if (event instanceof NavigationEnd) {
-            console.log('loading false');
             this.eksiciSharedService.sessionbean.loading = false;
             document.getElementById('waitingDialogCloserButton').click();
         }
 
         // Set loading state to false in both of the below events to hide the spinner in case a request fails
         if (event instanceof NavigationCancel) {
-            console.log('loading false');
             this.eksiciSharedService.sessionbean.loading = false;
             document.getElementById('waitingDialogCloserButton').click();
         }
         if (event instanceof NavigationError) {
-            console.log('loading false');
             this.eksiciSharedService.sessionbean.loading = false;
             document.getElementById('waitingDialogCloserButton').click();
         }

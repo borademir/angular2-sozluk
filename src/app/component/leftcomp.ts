@@ -92,6 +92,11 @@ export class EksiLeftsideComponent {
       console.log('left defaults');
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
+
+    if(this.eksiciSharedService.sessionbean.currentTopic == null || this.eksiciSharedService.sessionbean.currentTopic.entryList == null){
+       console.log('current topic is null..');
+      this.eksiciSharedService.isCollapsed = false;
+    }
     
   }
 

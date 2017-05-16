@@ -19,12 +19,14 @@ export class EksiSharedService {
 
   loadTopicsAsync(ptopicsType: String, pTopicsTypeDescription: String) {
     console.log('loading topics');
+    this.sessionbean.changeAsyncJobStatus(true);
     this.eksiciService.getTopics(ptopicsType).subscribe(
       data => this.sessionbean.topicsCurrentPage = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed topics loaded..");
         this.sessionbean.topicsTypeDescription = pTopicsTypeDescription;
+        this.sessionbean.changeAsyncJobStatus(false);
       }
 
     );
@@ -35,7 +37,8 @@ export class EksiSharedService {
  * http://www.eksici.com/api/v1/topics/entries?topicsHref=
  */
   loadTopicEntriesAsync(pHref: String) {
-    console.log('loading topic entries');
+    console.log('loading topic entries')
+    this.sessionbean.changeAsyncJobStatus(true);
     this.eksiciService.getTopicEntries(pHref).subscribe(
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
@@ -51,6 +54,7 @@ export class EksiSharedService {
         }
         console.log('scrolling..and true');
         this.isCollapsed = true;
+        this.sessionbean.changeAsyncJobStatus(false);
       }
 
     );
@@ -58,11 +62,13 @@ export class EksiSharedService {
 
   loadEntry(pEntryId: String) {
     console.log('loading entry');
+    this.sessionbean.changeAsyncJobStatus(true);
     this.eksiciService.getEntry(pEntryId).subscribe(
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed and entry loaded..");
+        this.sessionbean.changeAsyncJobStatus(false);
       }
 
     );

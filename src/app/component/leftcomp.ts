@@ -127,21 +127,21 @@ export class EksiLeftsideComponent {
     navigationInterceptor(event: RouterEvent): void {
         if (event instanceof NavigationStart) {
             console.log('loading true');
-            this.eksiciSharedService.sessionbean.loading = true;
+            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(true);
             document.getElementById('waitingDialogOpenerButton').click();
         }
         if (event instanceof NavigationEnd) {
-            this.eksiciSharedService.sessionbean.loading = false;
+            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(false);
             document.getElementById('waitingDialogCloserButton').click();
         }
 
         // Set loading state to false in both of the below events to hide the spinner in case a request fails
         if (event instanceof NavigationCancel) {
-            this.eksiciSharedService.sessionbean.loading = false;
+            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(false);
             document.getElementById('waitingDialogCloserButton').click();
         }
         if (event instanceof NavigationError) {
-            this.eksiciSharedService.sessionbean.loading = false;
+            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(false);
             document.getElementById('waitingDialogCloserButton').click();
         }
     }

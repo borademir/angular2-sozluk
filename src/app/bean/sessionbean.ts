@@ -7,7 +7,7 @@ import { Channel }                 from '../model/channel';
  */
 export class SessionBean {
 
-    channels: Channel[];
+    channels: Channel[] = new Array<Channel>();
     topicsType: String;
     topicsTypeDescription: String;
     topicsCurrentPage: TopicPager = new TopicPager();
@@ -16,12 +16,29 @@ export class SessionBean {
 
     clientWidth: number = 0;
     renderTopicList: boolean = true;
-    loading: boolean = true;
+    showLoadingDiv: boolean = false;
+    asyncJobWorking: boolean = false;
 
     constructor(values: Object = {}) {
         Object.assign(this, values)
     }
 
+    changeAsyncJobStatus(pStatus: boolean){
+        this.showLoadingDiv = pStatus;
+        this.asyncJobWorking = pStatus;
+        console.log('changeAsyncJobStatus:' + pStatus);
+    }
+
+    changeLoadingStatusFromNavigationLifeCycle(pStatus: boolean){
+        if(!this.asyncJobWorking){
+            console.log('changeLoadingStatusFromNavigationLifeCycle:' + pStatus);
+            this.showLoadingDiv = pStatus;
+        }
+    }
+
+    get loading(){
+        return this.showLoadingDiv;
+    } 
     get channelOffset(){
         if(this.mobile){
             return 0;

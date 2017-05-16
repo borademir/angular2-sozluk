@@ -29,6 +29,9 @@ export class EksiLeftsideComponent {
           console.log('event.url from leftside:' + event.url);
           this.eksiciSharedService.sessionbean.lastTopicTypeUrl = event.url;
         }
+        if(event.url.indexOf('/entry/') >= 0){
+          this.eksiciSharedService.isCollapsed=true;
+        }
         this.navigationInterceptor(event);
     });
   }
@@ -103,7 +106,7 @@ export class EksiLeftsideComponent {
     }
 
     if(this.eksiciSharedService.sessionbean.currentTopic == null || this.eksiciSharedService.sessionbean.currentTopic.entryList == null){
-       console.log('false3');
+       
       this.eksiciSharedService.isCollapsed = false;
     }
     

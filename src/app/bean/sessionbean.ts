@@ -42,7 +42,9 @@ export class SessionBean {
         return this.showLoadingDiv;
     } 
     get channelOffset(){
-        if(this.mobile){
+        if(this.clientWidth<1050 && this.clientWidth >=800){
+            return 4;
+        }else if(this.clientWidth<800){
             return 0;
         }
         return 10;
@@ -71,7 +73,7 @@ export class SessionBean {
     }
 
     get mobile(){
-        return this.clientWidth<800;
+        return this.clientWidth<768;
     }
     
 }

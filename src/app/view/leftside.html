@@ -24,10 +24,15 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage>1 && 1<=eksiciSharedService.sessionbean.currentTopic.currentEntryPage-eksiciSharedService.sessionbean.pagingOffset"
+                        <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
                                 class="btn btn-primary btn-xs"
                                 [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]">
-                            İlk Sayfa
+                            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
+                                class="btn btn-primary btn-xs"
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage-1)]">
+                            <i class="fa fa-angle-left" aria-hidden="true"></i>
                         </button>
                         <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
                             <button type="button" 
@@ -41,10 +46,15 @@
                                 {{page}}
                             </button>
                         </template>
-                        <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage != eksiciSharedService.sessionbean.currentTopic.totalEntryPage && eksiciSharedService.sessionbean.currentTopic.totalEntryPage >eksiciSharedService.sessionbean.currentTopic.currentEntryPage+eksiciSharedService.sessionbean.pagingOffset"
+                        <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
+                                class="btn btn-primary btn-xs"
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage+1)]">
+                            <i class="fa fa-angle-right" aria-hidden="true"></i>
+                        </button>
+                        <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
                                 class="btn btn-primary btn-xs"
                                 [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
-                            Son Sayfa
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                         </button>
 
 
@@ -84,10 +94,15 @@
                 </button>
                 <hr/>
                 <div class="text-center">
-                    <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage>1 && 1<=eksiciSharedService.sessionbean.currentTopic.currentEntryPage-eksiciSharedService.sessionbean.pagingOffset"
+                    <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
                             class="btn btn-primary btn-xs"
                             [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]">
-                        İlk Sayfa
+                        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
+                            class="btn btn-primary btn-xs"
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage-1)]">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </button>
                     <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
                         <button type="button" 
@@ -101,11 +116,18 @@
                             {{page}}
                         </button>
                     </template>
-                    <button type="button" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage != eksiciSharedService.sessionbean.currentTopic.totalEntryPage && eksiciSharedService.sessionbean.currentTopic.totalEntryPage >eksiciSharedService.sessionbean.currentTopic.currentEntryPage+eksiciSharedService.sessionbean.pagingOffset"
+                    <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
+                            class="btn btn-primary btn-xs"
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage+1)]">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </button>
+                    <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
                             class="btn btn-primary btn-xs"
                             [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
-                        Son Sayfa
+                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </button>
+
+
                 </div>
             </div>
 

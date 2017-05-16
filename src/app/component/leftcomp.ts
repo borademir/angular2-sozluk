@@ -29,6 +29,9 @@ export class EksiLeftsideComponent {
     });
   }
 
+  ngOnDestroy() {
+     this.sub.unsubscribe();
+  }
   ngOnInit(): void {
     this.router.events.subscribe((evt) => {
         if (!(evt instanceof NavigationEnd)) {

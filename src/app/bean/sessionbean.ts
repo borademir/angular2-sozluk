@@ -47,10 +47,25 @@ export class SessionBean {
     }
 
     get pagingOffset(){
-        if(this.mobile){
-            return 4;
+        let offset = this.mobile ? 4 : 15;
+        /*console.log('offset:' + offset);
+        let overflow = 0;
+        if(this.currentTopic != null && this.currentTopic.currentEntryPage > 0){
+            let current = this.currentTopic.currentEntryPage;
+            let total = this.currentTopic.totalEntryPage;
+            console.log('total:' + total);
+            console.log('current:' + current);
+            if(total-current > offset){
+                overflow = total-current-offset;
+            }
+            if(current-total > offset){
+                overflow = current-total-offset;
+            }
+            console.log('current:' + current);
         }
-        return 15;
+        return offset+overflow;
+        */
+        return offset;
     }
 
     get mobile(){

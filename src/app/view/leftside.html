@@ -26,12 +26,14 @@
                     <div class="text-center">
                         <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
                                 class="btn btn-primary btn-xs"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]">
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]"
+                                routerLinkActive="active">
                             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                         </button>
                         <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
                                 class="btn btn-primary btn-xs"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage-1)]">
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage-1)]"
+                                routerLinkActive="active">
                             <i class="fa fa-angle-left" aria-hidden="true"></i>
                         </button>
                         <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
@@ -41,19 +43,22 @@
                                        && eksiciSharedService.sessionbean.currentTopic.totalEntryPage>1
                                        "
                                     [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page}"
-                                    [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page)]"
-                                    [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page">
-                                {{page}}
+                                    [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page),{tim:eksiciSharedService.timeInMiliseconds}]"
+                                    routerLinkActive="active"
+                                    >
+                                <i class="fa fa-refresh" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page" aria-hidden="true"></i>  {{page}}
                             </button>
                         </template>
                         <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
                                 class="btn btn-primary btn-xs"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage+1)]">
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage+1)]"
+                                routerLinkActive="active">
                             <i class="fa fa-angle-right" aria-hidden="true"></i>
                         </button>
                         <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
                                 class="btn btn-primary btn-xs"
-                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
+                                [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]"
+                                routerLinkActive="active">
                             <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                         </button>
 
@@ -96,12 +101,14 @@
                 <div class="text-center">
                     <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
                             class="btn btn-primary btn-xs"
-                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]">
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,1)]"
+                            routerLinkActive="active">
                         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </button>
                     <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage==1"
                             class="btn btn-primary btn-xs"
-                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage-1)]">
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage-1)]"
+                            routerLinkActive="active">
                         <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </button>
                     <template ngFor let-i="index" let-c="count" let-page [ngForOf]="eksiciSharedService.sessionbean.currentTopic.pageNumberlist">
@@ -112,18 +119,21 @@
                                     "
                                 [ngClass]="{'btn' : true , 'btn-primary': true, 'btn-xs': eksiciSharedService.sessionbean.currentTopic.currentEntryPage != page , 'btn-sm': eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page}"
                                 [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic , page)]"
-                                [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page">
-                            {{page}}
+                                routerLinkActive="active"
+                                >
+                            <i class="fa fa-refresh" *ngIf="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == page" aria-hidden="true"></i>  {{page}}
                         </button>
                     </template>
                     <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
                             class="btn btn-primary btn-xs"
-                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage+1)]">
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.currentEntryPage+1)]"
+                            routerLinkActive="active">
                         <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </button>
                     <button type="button" [disabled]="eksiciSharedService.sessionbean.currentTopic.currentEntryPage == eksiciSharedService.sessionbean.currentTopic.totalEntryPage"
                             class="btn btn-primary btn-xs"
-                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]">
+                            [routerLink]="[eksiciSharedService.getEntryRouterLinkFromTemplate(eksiciSharedService.sessionbean.currentTopic,eksiciSharedService.sessionbean.currentTopic.totalEntryPage)]"
+                            routerLinkActive="active">
                         <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                     </button>
 

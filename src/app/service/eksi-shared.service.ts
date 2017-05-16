@@ -98,4 +98,9 @@ export class EksiSharedService {
    return routerLink;
   } 
 
+  get timeInMiliseconds(){
+    var date = new Date();
+    return date.getTime();
+  }
+
 }

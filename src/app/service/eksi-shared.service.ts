@@ -106,6 +106,7 @@ export class EksiSharedService {
       () => {
         console.log("the subscription is completed and suser loaded.." + this.sessionbean.suser.nick);
         this.sessionbean.changeAsyncJobStatus(false);
+        this.isCollapsed=true;
       }
 
     );

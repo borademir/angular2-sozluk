@@ -12,23 +12,45 @@
                                             {{eksiciSharedService.sessionbean.suser.nick}}
                                         </a>
                                     </div>
-                                        <ul class="fa-ul">
-                                            <li><i class="fa-li fa fa-info"></i>Toplam :{{eksiciSharedService.sessionbean.suser.totalEntryCount}}</li>
-                                            <li><i class="fa-li fa fa-info"></i>Son 1 ay:{{eksiciSharedService.sessionbean.suser.lastMonthEntryCount}}</li>
-                                            <li><i class="fa-li fa fa-info"></i>Son 1 hafta:{{eksiciSharedService.sessionbean.suser.lastWeekEntryCount}}</li>
-                                            <li><i class="fa-li fa fa-info"></i>Son 24 saat:{{eksiciSharedService.sessionbean.suser.todayEntryCount}}</li>
-                                            <li><i class="fa-li fa fa-clock-o"></i>Son entry:{{eksiciSharedService.sessionbean.suser.lastEntryTime}}</li>
-                                        </ul>
+                                    <hr/>
+                                    <ul class="fa-ul">
+                                        <li><i class="fa-li fa fa-info"></i>Toplam :{{eksiciSharedService.sessionbean.suser.totalEntryCount}}</li>
+                                        <li><i class="fa-li fa fa-info"></i>Son 1 ay:{{eksiciSharedService.sessionbean.suser.lastMonthEntryCount}}</li>
+                                        <li><i class="fa-li fa fa-info"></i>Son 1 hafta:{{eksiciSharedService.sessionbean.suser.lastWeekEntryCount}}</li>
+                                        <li><i class="fa-li fa fa-info"></i>Son 24 saat:{{eksiciSharedService.sessionbean.suser.todayEntryCount}}</li>
+                                        <li><i class="fa-li fa fa-clock-o"></i>Son entry:{{eksiciSharedService.sessionbean.suser.lastEntryTime}}</li>
+                                    </ul>
                                 </div>
                                 <div class="col-xs-3 text-right">
                                     <i [ngClass]="{'fa' : true , 'fa-user' : true ,  'fa-3x' : eksiciSharedService.sessionbean.mobile , 'fa-5x' : !eksiciSharedService.sessionbean.mobile}" ></i>
                                 </div>
                             </div>
+                            <i class="fa fa-quote-left" aria-hidden="true"></i>
+                            <div class="panel-footer" [innerHtml]="eksiciSharedService.sessionbean.suser.profileIntroEntry.entryHtml" ></div>
+                            <div class="text-right"><i class="fa fa-quote-right" aria-hidden="true"></i></div>
+                            <div class="text-right">{{eksiciSharedService.sessionbean.suser.profileIntroEntry.entryDate}}</div>
                         </div>
-                        <div class="panel-footer" [innerHtml]="eksiciSharedService.sessionbean.suser.profileIntroEntry.entryHtml">
-                            
-                        </div>
+
                     </div>
+                    <ul class="nav nav-tabs">
+                        <li role="presentation" class="active"><a href="#">entry'ler</a></li>
+                        <li role="presentation"><a href="#">favoriler</a></li>
+                        <li dropdown role="presentation"> 
+                            <a dropdownToggle data-toggle="dropdown" href="#">
+                                istatistikler <i class="fa fa-caret-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user" dropdownMenu>
+                                <li><a href="#"><i class="fa fa-star fa-fw"></i>en çok favorilenenler</a></li>
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i>son oylananları</a></li>
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i>bu hafta dikkat çekenleri</a></li>
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i>el emeği göz nuru</a></li>
+                                <li><a href="#"><i class="fa fa-heart fa-fw"></i>en beğenilenleri</a></li>
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i>favori yazarları</a></li>
+                                <li><a href="#"><i class="fa fa-sign-in fa-fw"></i>katkıda bulunduğu kanallar</a></li>
+                                <li><a href="#"><i class="fa fa-user fa-fw"></i>ukteleri</a></li>
+                            </ul>
+                        </li>
+                    </ul>
                 </div>
 
             </div>

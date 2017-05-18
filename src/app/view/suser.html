@@ -1,0 +1,39 @@
+<table style="width:100%;height: 100%;">
+    <tr valign="top">
+        <td width="100%">
+            <div [ngClass]="{'container-fluid' : !eksiciSharedService.sessionbean.mobile}" *ngIf="eksiciSharedService.sessionbean.suser != null">
+                <div class="page-header">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-9">
+                                    <div [ngClass]="{'large' : eksiciSharedService.sessionbean.mobile , 'huge' : !eksiciSharedService.sessionbean.mobile}">
+                                        <a [routerLink]="[eksiciSharedService.getEntryRouterLink(eksiciSharedService.sessionbean.suser.topicHref),{tim:eksiciSharedService.timeInMiliseconds}]"  routerLinkActive="active">
+                                            {{eksiciSharedService.sessionbean.suser.nick}}
+                                        </a>
+                                    </div>
+                                        <ul class="fa-ul">
+                                            <li><i class="fa-li fa fa-info"></i>Toplam :{{eksiciSharedService.sessionbean.suser.totalEntryCount}}</li>
+                                            <li><i class="fa-li fa fa-info"></i>Son 1 ay:{{eksiciSharedService.sessionbean.suser.lastMonthEntryCount}}</li>
+                                            <li><i class="fa-li fa fa-info"></i>Son 1 hafta:{{eksiciSharedService.sessionbean.suser.lastWeekEntryCount}}</li>
+                                            <li><i class="fa-li fa fa-info"></i>Son 24 saat:{{eksiciSharedService.sessionbean.suser.todayEntryCount}}</li>
+                                            <li><i class="fa-li fa fa-clock-o"></i>Son entry:{{eksiciSharedService.sessionbean.suser.lastEntryTime}}</li>
+                                        </ul>
+                                </div>
+                                <div class="col-xs-3 text-right">
+                                    <i [ngClass]="{'fa' : true , 'fa-user' : true ,  'fa-3x' : eksiciSharedService.sessionbean.mobile , 'fa-5x' : !eksiciSharedService.sessionbean.mobile}" ></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-footer" [innerHtml]="eksiciSharedService.sessionbean.suser.profileIntroEntry.entryHtml">
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </td>
+    </tr>
+</table>

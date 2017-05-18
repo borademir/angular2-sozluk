@@ -81,7 +81,12 @@
                 <template ngFor let-i="index" let-c="count" let-entry [ngForOf]="eksiciSharedService.sessionbean.currentTopic.entryList">
                     <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" [id]="entry.entryId">
                         <div class="panel-heading">
-                            <span>{{entry.suser.nick}}</span>
+                            <div class="panel-title">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                                <a [routerLink]=[eksiciSharedService.getSuserRouterLink(entry.suser.nick)] routerLinkActive="active">
+                                    {{entry.suser.nick}}
+                                </a>
+                            </div>
                         </div>
                         <div class="panel-body" [innerHtml]="entry.entryHtml"></div>
                         <div class="panel-footer">

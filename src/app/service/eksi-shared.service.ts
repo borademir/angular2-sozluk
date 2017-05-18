@@ -17,6 +17,18 @@ export class EksiSharedService {
     console.log('shared service constructed..');
   }
 
+  loadPageDefaults(){
+    if(this.sessionbean.topicsCurrentPage.contentList == null){
+      console.log('left defaults');
+      this.loadTopicsAsync('topic/today','bugün');
+    }
+
+    if(this.sessionbean.currentTopic == null || this.sessionbean.currentTopic.entryList == null){
+       
+      this.isCollapsed = false;
+    }
+  }
+
   loadTopicsAsync(ptopicsType: String, pTopicsTypeDescription: String) {
     //this.sessionbean.lastTopicTypeUrl = ptopicsType;
     console.log('loading topics');
@@ -84,6 +96,21 @@ export class EksiSharedService {
     return null;
   }
 
+
+  loadSuser(pSuserNick: String) {
+    console.log('loading suser');
+    this.sessionbean.changeAsyncJobStatus(true);
+    this.eksiciService.getSuser(pSuserNick).subscribe(
+      data => this.sessionbean.suser = data,
+      error => this.sessionbean.errorMessage = <any>error,
+      () => {
+        console.log("the subscription is completed and suser loaded.." + this.sessionbean.suser.nick);
+        this.sessionbean.changeAsyncJobStatus(false);
+      }
+
+    );
+  }
+
   getEntryRouterLink(pTopicHref: String){
    let routerLink = "/topic/entries/"+pTopicHref;
    return routerLink;
@@ -98,6 +125,11 @@ export class EksiSharedService {
    let routerLink = "/entry/"+pEntryId;
    return routerLink;
   } 
+
+
+  getSuserRouterLink(pSuserNick: String){
+    return "/suser/"+pSuserNick.split(' ').join('-');;
+  }
 
   get timeInMiliseconds(){
     var date = new Date();

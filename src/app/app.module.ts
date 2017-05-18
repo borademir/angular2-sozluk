@@ -9,7 +9,8 @@ import { DropdownModule } from 'ng2-bootstrap';
 import { AppComponent } from './component/rootcomp';
 import { EksiMenuBarComponent} from './component/menubarcomp';
 import { TopicListComponent} from './component/topiclistcomp';
-import { EksiLeftsideComponent} from './component/leftcomp';
+import { TopicInfoComponent} from './component/topicinfocomp';
+import { SuserComponent} from './component/susercomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
@@ -39,29 +40,36 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
 
 const appRoutes: Routes = [
   { 
+    path: 'suser/:suserNick'          , 
+    component: SuserComponent ,
+    data: {
+      type:  'suser'
+    }
+  },
+  { 
     path: 'topic/entries/:topicHref'          , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       type:  'topic'
     }
   },
   { 
     path: ''          , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       type:  'see'
     }
   },
   { 
     path: 'entry/:entryId'          , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       type:  'entry'
     }
   },
   { 
     path: 'today'          , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       href: 'topic/today',
       title: 'bugün',
@@ -70,7 +78,7 @@ const appRoutes: Routes = [
   },
   { 
     path: 'deserted'          , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       href: 'topic/deserted',
       title: 'başıboşlar',
@@ -79,7 +87,7 @@ const appRoutes: Routes = [
   },
   { 
     path: 'videos'          , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       href: 'topic/videos',
       title: 'videolar',
@@ -87,7 +95,7 @@ const appRoutes: Routes = [
     }
   },
   { path: 'popular'        , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       href: 'topic/popular',
       title: 'gündem',
@@ -95,7 +103,7 @@ const appRoutes: Routes = [
     }
   },
   { path: 'todayinhistory/:year'        , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       href: 'topic/todayinhistory/',
       title: 'tarihte bugün',
@@ -103,7 +111,7 @@ const appRoutes: Routes = [
     }
   },
   { path: 'channels/:channelname/topics'        , 
-    component: EksiLeftsideComponent ,
+    component: TopicInfoComponent ,
     data: {
       type:  'channel'
     }
@@ -114,7 +122,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,EksiMenuBarComponent,EksiLeftsideComponent, TopicListComponent
+    AppComponent,EksiMenuBarComponent,TopicInfoComponent, TopicListComponent , SuserComponent
   ],
   imports: [
     BrowserModule,

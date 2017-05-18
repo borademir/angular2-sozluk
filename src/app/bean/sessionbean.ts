@@ -1,6 +1,7 @@
 import { TopicPager } from '../model/topicpager';
-import { Topic } from '../model/topic';
-import { Channel }                 from '../model/channel';
+import { Topic }      from '../model/topic';
+import { Channel }    from '../model/channel';
+import { Suser }    from '../model/suser';
 
 /**
  * All session variables over shared service
@@ -20,6 +21,8 @@ export class SessionBean {
     asyncJobWorking: boolean = false;
 
     lastTopicTypeUrl: String = '';
+
+    suser: Suser = null;
 
     constructor(values: Object = {}) {
         Object.assign(this, values)

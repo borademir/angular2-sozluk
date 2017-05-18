@@ -4,6 +4,7 @@ import { Observable }              from 'rxjs/Observable';
 import { Channel }                 from '../model/channel';
 import { TopicPager}               from '../model/topicpager';
 import { Topic }                   from '../model/topic';
+import { Suser }                   from '../model/suser';
 import { AutoComplete }            from '../model/autocomplete';
 import { environment }             from '../../environments/environment';
 
@@ -49,6 +50,13 @@ export class EksiciService {
     let resp: Observable<Topic> = this.http.get(environment.apiBaseUrl + 'entry/' + pEntryId)
                     .map((response: Response) => <Topic>response.json())
                     .catch(this.handleError);    
+    return resp;
+  }
+
+  getSuser (pSuserNick: String): Observable<Suser> {
+    let resp: Observable<Suser> = this.http.get(environment.apiBaseUrl + 'suser/' + pSuserNick)
+                    .map((response: Response) => <Suser>response.json())
+                    .catch(this.handleError);
     return resp;
   }
 

@@ -9,12 +9,12 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Component({
-  selector: 'eksi-leftside',
-  templateUrl: '../view/leftside.html',
+  selector: 'eksi-topicinfo',
+  templateUrl: '../view/topicinfo.html',
   //styleUrls: ['../view/style/left.css'],
   providers: []
 })
-export class EksiLeftsideComponent {
+export class TopicInfoComponent {
   
   private sub: Subscription;
   
@@ -100,15 +100,7 @@ export class EksiLeftsideComponent {
       this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
     }
     
-    if(this.eksiciSharedService.sessionbean.topicsCurrentPage.contentList == null){
-      console.log('left defaults');
-      this.eksiciSharedService.loadTopicsAsync('topic/today','bugün');
-    }
-
-    if(this.eksiciSharedService.sessionbean.currentTopic == null || this.eksiciSharedService.sessionbean.currentTopic.entryList == null){
-       
-      this.eksiciSharedService.isCollapsed = false;
-    }
+    this.eksiciSharedService.loadPageDefaults();
     
   }
 

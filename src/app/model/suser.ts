@@ -1,6 +1,5 @@
 export class Suser {
-
-    entryAuthor: String = '';
-    entryAuthorId: String = '';
-    href: String = '';
+    nick    : String = '';
+    suserId : String = '';
+    href    : String = '';
 }

@@ -1,4 +1,5 @@
-import { Entry } from '../model/entry';
+import { Entry }      from '../model/entry';
+import { TopicPager } from '../model/topicpager';
 
 export class Suser {
     nick                   : String = null;
@@ -12,6 +13,8 @@ export class Suser {
     lastWeekEntryCount     : String = null;
     todayEntryCount        : String = null;
     lastEntryTime          : String = null;
+    currentEntryStats      : TopicPager = null;
+    activeTabIndex         : number = 1;
 
     constructor(values: Object = {}){
         Object.assign(this,values)

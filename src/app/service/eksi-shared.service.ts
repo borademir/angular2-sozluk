@@ -45,6 +45,24 @@ export class EksiSharedService {
     );
   }
 
+  loadSuserEntryStats(pSuserNick: String , pEntryStatType: String, pActiveTabIndex: number) {
+    document.getElementById('waitingDialogOpenerButton').click();
+    console.log('loading entry stats');
+    this.sessionbean.changeAsyncJobStatus(true);
+    this.eksiciService.getSuserEntryStats(pSuserNick,pEntryStatType).subscribe(
+      data => this.sessionbean.suser.currentEntryStats = data,
+      error => this.sessionbean.errorMessage = <any>error,
+      () => {
+        console.log("the subscription is completed entry stats loaded..");
+        this.sessionbean.changeAsyncJobStatus(false);
+        this.sessionbean.suser.activeTabIndex = pActiveTabIndex;
+        //document.getElementById('waitingDialogCloserButton').click();
+        setTimeout(document.getElementById('waitingDialogCloserButton').click(),1000);
+      }
+
+    );
+  }
+
 /**
  * 
  * http://www.eksici.com/api/v1/topics/entries?topicsHref=
@@ -107,6 +125,8 @@ export class EksiSharedService {
         console.log("the subscription is completed and suser loaded.." + this.sessionbean.suser.nick);
         this.sessionbean.changeAsyncJobStatus(false);
         this.isCollapsed=true;
+        this.loadSuserEntryStats(pSuserNick, "son-entryleri",1);
+        console.log('suser entry stats:' + pSuserNick);
       }
 
     );

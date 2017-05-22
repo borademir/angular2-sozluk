@@ -8,6 +8,7 @@ export class TopicPager {
     creationDate    : number  = 0 ;
     currentPage     : number  = 0 ;
     contentList     : Topic[] = null;
+    description     : String  = null;
 
     constructor(values: Object = {}){
         Object.assign(this,values)

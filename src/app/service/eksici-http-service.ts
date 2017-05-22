@@ -39,6 +39,13 @@ export class EksiciService {
     return resp;
   }
 
+  getSuserEntryStats (pSuserNick: String , pEntryStatType: String): Observable<TopicPager> {
+    let resp: Observable<TopicPager> = this.http.get(environment.apiBaseUrl + 'suser/' + pSuserNick + '/stats/entry/' + pEntryStatType)
+                    .map((response: Response) => <TopicPager>response.json())
+                    .catch(this.handleError);
+    return resp;
+  }
+
   getTopicEntries (pHref: String): Observable<Topic> {
     let resp: Observable<Topic> = this.http.get(environment.apiBaseUrl + 'topic/entries?topicsHref=' + pHref) // paging template gecisi
                     .map((response: Response) => <Topic>response.json())

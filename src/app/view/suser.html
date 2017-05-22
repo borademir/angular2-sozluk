@@ -12,45 +12,101 @@
                                             {{eksiciSharedService.sessionbean.suser.nick}}
                                         </a>
                                     </div>
-                                    <hr/>
-                                    <ul class="fa-ul">
-                                        <li><i class="fa-li fa fa-info"></i>Toplam :{{eksiciSharedService.sessionbean.suser.totalEntryCount}}</li>
-                                        <li><i class="fa-li fa fa-info"></i>Son 1 ay:{{eksiciSharedService.sessionbean.suser.lastMonthEntryCount}}</li>
-                                        <li><i class="fa-li fa fa-info"></i>Son 1 hafta:{{eksiciSharedService.sessionbean.suser.lastWeekEntryCount}}</li>
-                                        <li><i class="fa-li fa fa-info"></i>Son 24 saat:{{eksiciSharedService.sessionbean.suser.todayEntryCount}}</li>
-                                        <li><i class="fa-li fa fa-clock-o"></i>Son entry:{{eksiciSharedService.sessionbean.suser.lastEntryTime}}</li>
-                                    </ul>
+                                    <small>
+                                        toplam <cite title="Source Title">{{eksiciSharedService.sessionbean.suser.totalEntryCount}}</cite> entry,
+                                        son 1 ayda {{eksiciSharedService.sessionbean.suser.lastMonthEntryCount}}, son 1 haftada 
+                                        {{eksiciSharedService.sessionbean.suser.lastWeekEntryCount}}, bugün {{eksiciSharedService.sessionbean.suser.todayEntryCount}},
+                                        son entry zamanı ise {{eksiciSharedService.sessionbean.suser.lastEntryTime}}
+                                    </small>
+
                                 </div>
                                 <div class="col-xs-3 text-right">
                                     <i [ngClass]="{'fa' : true , 'fa-user' : true ,  'fa-3x' : eksiciSharedService.sessionbean.mobile , 'fa-5x' : !eksiciSharedService.sessionbean.mobile}" ></i>
                                 </div>
                             </div>
-                            <i class="fa fa-quote-left" aria-hidden="true"></i>
-                            <div class="panel-footer" [innerHtml]="eksiciSharedService.sessionbean.suser.profileIntroEntry.entryHtml" ></div>
-                            <div class="text-right"><i class="fa fa-quote-right" aria-hidden="true"></i></div>
-                            <div class="text-right">{{eksiciSharedService.sessionbean.suser.profileIntroEntry.entryDate}}</div>
+                            
+                      
+                            <span class="lead">
+                                <i class="fa fa-comment" aria-hidden="true"></i>
+                                <a [routerLink]="[eksiciSharedService.sessionbean.suser.profileIntroEntry.href]"  routerLinkActive="active" >
+                                    {{eksiciSharedService.sessionbean.suser.profileIntroEntry.entryText}}
+                                </a>
+                            </span>
+                            <blockquote >
+                                <div class="panel-footer" [innerHtml]="eksiciSharedService.sessionbean.suser.profileIntroEntry.entryHtml" ></div>
+                                <small>
+                                    <cite title="Source Title">{{eksiciSharedService.sessionbean.suser.profileIntroEntry.entryDate}}</cite>
+                                </small>
+                            </blockquote>   
                         </div>
 
                     </div>
                     <ul class="nav nav-tabs">
-                        <li role="presentation" class="active"><a href="#">entry'ler</a></li>
-                        <li role="presentation"><a href="#">favoriler</a></li>
-                        <li dropdown role="presentation"> 
+                        <li role="presentation" [ngClass]="{'active' : eksiciSharedService.sessionbean.suser.activeTabIndex == 1 }" >
+                            <a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'son-entryleri',1)">
+                                entry'ler
+                            </a>                       
+                        </li>
+                        <li dropdown role="presentation" [ngClass]="{'active' : eksiciSharedService.sessionbean.suser.activeTabIndex == 2 }"> 
                             <a dropdownToggle data-toggle="dropdown" href="#">
                                 istatistikler <i class="fa fa-caret-down"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user" dropdownMenu>
-                                <li><a href="#"><i class="fa fa-star fa-fw"></i>en çok favorilenenler</a></li>
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i>son oylananları</a></li>
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i>bu hafta dikkat çekenleri</a></li>
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i>el emeği göz nuru</a></li>
-                                <li><a href="#"><i class="fa fa-heart fa-fw"></i>en beğenilenleri</a></li>
+                                <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'en-cok-favorilenen-entryleri',2)"><i class="fa fa-star fa-fw"></i>en çok favorilenenler</a></li>
+                                <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'son-oylananlari',2)"><i class="fa fa-user fa-fw"></i>son oylananları</a></li>
+                                <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'bu-hafta-dikkat-cekenleri',2)"><i class="fa fa-user fa-fw"></i>bu hafta dikkat çekenleri</a></li>
+                                <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'el-emegi-goz-nuru',2)"><i class="fa fa-user fa-fw"></i>el emeği göz nuru</a></li>
+                                <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'en-begenilenleri',2)"><i class="fa fa-heart fa-fw"></i>en beğenilenleri</a></li>
                                 <li><a href="#"><i class="fa fa-user fa-fw"></i>favori yazarları</a></li>
                                 <li><a href="#"><i class="fa fa-sign-in fa-fw"></i>katkıda bulunduğu kanallar</a></li>
-                                <li><a href="#"><i class="fa fa-user fa-fw"></i>ukteleri</a></li>
+                                <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'ukteleri',2)"><i class="fa fa-user fa-fw"></i>ukteleri</a></li>
                             </ul>
                         </li>
+                        <li role="presentation" [ngClass]="{'active' : eksiciSharedService.sessionbean.suser.activeTabIndex == 3 }">
+                            <a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'favori-entryleri',3)">
+                                favoriler
+                            </a>
+                        </li>
                     </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane fade in active" id="home" *ngIf="eksiciSharedService.sessionbean.suser != null && eksiciSharedService.sessionbean.suser.currentEntryStats != null">
+                            <h4>{{eksiciSharedService.sessionbean.suser.currentEntryStats.description}}</h4>
+                            <template ngFor let-i="index" let-topic [ngForOf]="eksiciSharedService.sessionbean.suser.currentEntryStats.contentList" >
+                                <template ngFor  let-c="count" let-entry [ngForOf]="topic.entryList">
+                                    <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" [id]="entry.entryId">
+                                        <div class="panel-heading">
+                                            <div class="panel-title">
+                                                <i class="fa fa-comments-o" aria-hidden="true"></i>
+                                                <a [routerLink]=[eksiciSharedService.getEntryRouterLink(topic.originalUrl),{tim:eksiciSharedService.timeInMiliseconds}] routerLinkActive="active">
+                                                    {{topic.topicText}}
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body" [innerHtml]="entry.entryHtml"></div>
+                                        <div class="panel-footer">
+                                                <a [routerLink]="[eksiciSharedService.getEntryIdRouterLink(entry.entryId)]"  
+                                                    routerLinkActive="active">
+                                                    <small class="text-muted"><i class="glyphicon glyphicon-time"></i> {{entry.entryDate}}</small>
+                                                </a>
+                                                <span class="badge" *ngIf="entry.favoriteCount > 0">{{entry.favoriteCount}}</span>
+                                        </div>
+                                    </div>
+                                </template>  
+                            </template>
+                        </div>
+                        <div class="tab-pane fade" id="profile">
+                            <h4>Profile Tab</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="tab-pane fade" id="messages">
+                            <h4>Messages Tab</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                        <div class="tab-pane fade" id="settings">
+                            <h4>Settings Tab</h4>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        </div>
+                    </div>
                 </div>
 
             </div>

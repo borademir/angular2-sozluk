@@ -1,0 +1,26 @@
+<table style="width:100%;height: 100%;">
+    <tr valign="top">
+        <td width="100%">
+            <div [ngClass]="{'container-fluid' : !eksiciSharedService.sessionbean.mobile}" >
+
+                <div class="container">
+                    <h1>sözlük girişi</h1>
+                    <form #loginForm="ngForm" novalidate="novalidate" (ngSubmit)="onSubmit()" >
+                    <div class="form-group">
+                        <label for="email">e-mail adresi</label>
+                        <input type="text" class="form-control" id="email" required  [(ngModel)]="email" name="email" >
+                    </div>
+                    <div class="form-group">
+                        <label for="password">şifre</label>
+                        <input type="password" class="form-control" id="password" required  [(ngModel)]="password" name="password">
+                    </div>
+                    <button type="submit" class="btn btn-success" [disabled]="!loginForm.form.valid">giriş yapmaya çabala</button>
+                    </form>
+                </div>
+
+            </div>
+
+
+        </td>
+    </tr>
+</table>

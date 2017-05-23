@@ -1,7 +1,8 @@
 import { TopicPager } from '../model/topicpager';
 import { Topic }      from '../model/topic';
 import { Channel }    from '../model/channel';
-import { Suser }    from '../model/suser';
+import { Suser }      from '../model/suser';
+import { LoginSuser }      from '../model/loginsuser';
 
 /**
  * All session variables over shared service
@@ -23,6 +24,7 @@ export class SessionBean {
     lastTopicTypeUrl: String = '';
 
     suser: Suser = null;
+    loginSuser: LoginSuser = null;
 
     constructor(values: Object = {}) {
         Object.assign(this, values)

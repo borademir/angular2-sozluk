@@ -132,6 +132,21 @@ export class EksiSharedService {
     );
   }
 
+
+  login(pEmail: String, pPassword: String) {
+    console.log('loading entry');
+    this.sessionbean.changeAsyncJobStatus(true);
+    this.eksiciService.login(pEmail,pPassword).subscribe(
+      data => this.sessionbean.loginSuser = data,
+      error => this.sessionbean.errorMessage = <any>error,
+      () => {
+        console.log("the subscription is completed login." + this.sessionbean.loginSuser.sozlukToken);
+        console.log("Err Mesaj: " + this.sessionbean.errorMessage);
+        this.sessionbean.changeAsyncJobStatus(false);
+      }
+
+    );
+  }
   getEntryRouterLink(pTopicHref: String){
    let routerLink = "/topic/entries/"+pTopicHref;
    return routerLink;

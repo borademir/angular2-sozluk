@@ -5,6 +5,7 @@ import { Channel }                 from '../model/channel';
 import { TopicPager}               from '../model/topicpager';
 import { Topic }                   from '../model/topic';
 import { Suser }                   from '../model/suser';
+import { LoginSuser }              from '../model/loginsuser';
 import { AutoComplete }            from '../model/autocomplete';
 import { environment }             from '../../environments/environment';
 
@@ -60,6 +61,17 @@ export class EksiciService {
     return resp;
   }
 
+  login (pEmail: String, pPassword: String): Observable<LoginSuser> {
+    let resp: Observable<LoginSuser> = this.http.get(environment.apiBaseUrl + 'login?email=' + pEmail + '&password=' + pPassword)
+                    .map((response: Response) => {
+                      console.log('map in');
+                      <LoginSuser>response.json()
+                    }
+                    )
+                    .catch(this.handleError);    
+    return resp;
+  }
+
   getSuser (pSuserNick: String): Observable<Suser> {
     let resp: Observable<Suser> = this.http.get(environment.apiBaseUrl + 'suser/' + pSuserNick)
                     .map((response: Response) => <Suser>response.json())
@@ -73,14 +85,16 @@ export class EksiciService {
     return body.data ;
   }
   private handleError (error: Response | any) {
-    
+    console.log('handle error start');
     let errMsg: string;
     if (error instanceof Response) {
       const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
+      console.log('Response error:' + JSON.stringify(body));
+      const err = body.message || JSON.stringify(body);
       errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
     } else {
       errMsg = error.message ? error.message : error.toString();
+      console.log('else error');
     }
     console.error('HTTP Service : ' + errMsg);
     return Observable.throw(errMsg);

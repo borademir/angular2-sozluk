@@ -11,6 +11,7 @@ import { EksiMenuBarComponent} from './component/menubarcomp';
 import { TopicListComponent} from './component/topiclistcomp';
 import { TopicInfoComponent} from './component/topicinfocomp';
 import { SuserComponent} from './component/susercomp';
+import { LoginComponent} from './component/logincomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
@@ -39,6 +40,13 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
   };
 
 const appRoutes: Routes = [
+  { 
+    path: 'login'          , 
+    component: LoginComponent ,
+    data: {
+      type:  'login'
+    }
+  },  
   { 
     path: 'suser/:suserNick'          , 
     component: SuserComponent ,
@@ -122,7 +130,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,EksiMenuBarComponent,TopicInfoComponent, TopicListComponent , SuserComponent
+    AppComponent,EksiMenuBarComponent,TopicInfoComponent, TopicListComponent , SuserComponent, LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -18,34 +18,17 @@ export class SessionBean {
 
     clientWidth: number = 0;
     renderTopicList: boolean = true;
-    showLoadingDiv: boolean = false;
     asyncJobWorking: boolean = false;
 
     lastTopicTypeUrl: String = '';
 
     suser: Suser = null;
-    loginSuser: LoginSuser = null;
+    loginSuser: LoginSuser = new LoginSuser();
 
-    constructor(values: Object = {}) {
-        Object.assign(this, values)
+    constructor() {
+        console.log('SessionBean constructor');
     }
 
-    changeAsyncJobStatus(pStatus: boolean){
-        this.showLoadingDiv = pStatus;
-        this.asyncJobWorking = pStatus;
-        console.log('changeAsyncJobStatus:' + pStatus);
-    }
-
-    changeLoadingStatusFromNavigationLifeCycle(pStatus: boolean){
-        if(!this.asyncJobWorking){
-            console.log('changeLoadingStatusFromNavigationLifeCycle:' + pStatus);
-            this.showLoadingDiv = pStatus;
-        }
-    }
-
-    get loading(){
-        return this.showLoadingDiv;
-    } 
     get channelOffset(){
         if(this.clientWidth<1050 && this.clientWidth >=800){
             return 4;
@@ -53,6 +36,10 @@ export class SessionBean {
             return 0;
         }
         return 7;
+    }
+
+    get userExists() {
+        return this.loginSuser != null && this.loginSuser.sozlukToken != null && this.loginSuser.suserInfo != null && this.loginSuser.suserInfo.nick != null;
     }
 
     get pagingOffset(){

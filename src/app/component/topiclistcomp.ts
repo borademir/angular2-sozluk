@@ -14,7 +14,7 @@ import 'rxjs/add/operator/catch';
 @Component({
   selector: 'eksi-topiclist',
   templateUrl: '../view/topiclist.html',
-  providers: [EksiciService]
+  providers: []
 })
 export class TopicListComponent {
 

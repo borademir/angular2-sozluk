@@ -16,7 +16,9 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EksiciService {
   
-  constructor (private http: Http) {}
+  constructor (private http: Http) {
+    console.log('EksiciService constructor');
+  }
 
   getChannels (): Observable<Channel[]> {
     let resp: Observable<Channel[]> = this.http.get(environment.apiBaseUrl + 'channels')
@@ -63,10 +65,10 @@ export class EksiciService {
 
   login (pEmail: String, pPassword: String): Observable<LoginSuser> {
     let resp: Observable<LoginSuser> = this.http.get(environment.apiBaseUrl + 'login?email=' + pEmail + '&password=' + pPassword)
-                    .map((response: Response) => {
-                      console.log('map in');
+                    .map((response: Response) => //{
+                      //console.log('map in:' + JSON.stringify(response.json()));
                       <LoginSuser>response.json()
-                    }
+                    //}
                     )
                     .catch(this.handleError);    
     return resp;

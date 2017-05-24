@@ -1,25 +1,34 @@
-import { Injectable } from '@angular/core';
-import { SessionBean } from '../bean/sessionbean';
-import { Subject }    from 'rxjs/Subject';
-import { EksiciService } from '../service/eksici-http-service';
-import { Topic } from '../model/topic';
-import { Channel }                 from '../model/channel';
+import { Injectable }     from '@angular/core';
+import { SessionBean }    from '../bean/sessionbean';
+import { Subject }        from 'rxjs/Subject';
+import { EksiciService }  from '../service/eksici-http-service';
+import { Topic }          from '../model/topic';
+import { Channel }        from '../model/channel';
+import { LoginSuser }        from '../model/loginsuser';
+import { Router, ActivatedRoute, Params, Data , NavigationEnd , Event as RouterEvent, NavigationStart,NavigationCancel, NavigationError } from '@angular/router';
 
 @Injectable()
 export class EksiSharedService {
 
-  sessionbean: SessionBean = new SessionBean();
+  private storageSession: SessionBean = new SessionBean();
   public isCollapsed: boolean = false;
 
   constructor(
     private eksiciService: EksiciService,
+    private router: Router
   ) {
-    console.log('shared service constructed..');
+    console.log('EksiSharedService constructor');
   }
 
+  get sessionbean(): SessionBean{
+    if(localStorage.getItem("sessionBeanItem") == null){
+      localStorage.setItem("sessionBeanItem",JSON.stringify(this.storageSession));
+    }
+    //return JSON.parse(localStorage.getItem("sessionBeanItem"));
+    return this.storageSession;
+  }
   loadPageDefaults(){
     if(this.sessionbean.topicsCurrentPage.contentList == null){
-      console.log('left defaults');
       this.loadTopicsAsync('topic/today','bugün');
     }
 
@@ -32,36 +41,61 @@ export class EksiSharedService {
   loadTopicsAsync(ptopicsType: String, pTopicsTypeDescription: String) {
     //this.sessionbean.lastTopicTypeUrl = ptopicsType;
     console.log('loading topics');
-    this.sessionbean.changeAsyncJobStatus(true);
+    this.changeAsyncJobStatus(true);
     this.eksiciService.getTopics(ptopicsType).subscribe(
       data => this.sessionbean.topicsCurrentPage = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed topics loaded..");
         this.sessionbean.topicsTypeDescription = pTopicsTypeDescription;
-        this.sessionbean.changeAsyncJobStatus(false);
+        this.changeAsyncJobStatus(false);
       }
 
     );
   }
 
-  loadSuserEntryStats(pSuserNick: String , pEntryStatType: String, pActiveTabIndex: number) {
-    document.getElementById('waitingDialogOpenerButton').click();
+  loadSuserEntryStats(pSuserNick: String , pEntryStatType: String, pActiveTabIndex: number) {    
     console.log('loading entry stats');
-    this.sessionbean.changeAsyncJobStatus(true);
+    this.changeAsyncJobStatus(true);
     this.eksiciService.getSuserEntryStats(pSuserNick,pEntryStatType).subscribe(
       data => this.sessionbean.suser.currentEntryStats = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed entry stats loaded..");
-        this.sessionbean.changeAsyncJobStatus(false);
+        this.changeAsyncJobStatus(false);
         this.sessionbean.suser.activeTabIndex = pActiveTabIndex;
-        //document.getElementById('waitingDialogCloserButton').click();
-        setTimeout(document.getElementById('waitingDialogCloserButton').click(),1000);
       }
 
     );
   }
+
+  hideWaitingDialog() {
+    setTimeout(document.getElementById('waitingDialogCloserButton').click(),1000);
+  }
+
+  showWaitingDialog() {
+    document.getElementById('waitingDialogOpenerButton').click();
+  }
+
+    changeAsyncJobStatus(pStatus: boolean){
+        if(pStatus){
+          this.showWaitingDialog();
+        }else{
+          this.hideWaitingDialog();
+        }
+        this.sessionbean.asyncJobWorking = pStatus;        
+    }
+
+    changeLoadingStatusFromNavigationLifeCycle(pStatus: boolean){
+        if(!this.sessionbean.asyncJobWorking){
+          console.log('changeLoadingStatusFromNavigationLifeCycle:' + pStatus);
+          if(pStatus){
+            this.showWaitingDialog();
+          }else{
+            this.hideWaitingDialog();
+          }
+        }
+    }
 
 /**
  * 
@@ -69,7 +103,7 @@ export class EksiSharedService {
  */
   loadTopicEntriesAsync(pHref: String) {
     console.log('loading topic entries')
-    this.sessionbean.changeAsyncJobStatus(true);
+    this.changeAsyncJobStatus(true);
     this.eksiciService.getTopicEntries(pHref).subscribe(
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
@@ -85,7 +119,7 @@ export class EksiSharedService {
         }
         console.log('scrolling..and true');
         this.isCollapsed = true;
-        this.sessionbean.changeAsyncJobStatus(false);
+        this.changeAsyncJobStatus(false);
       }
 
     );
@@ -93,13 +127,13 @@ export class EksiSharedService {
 
   loadEntry(pEntryId: String) {
     console.log('loading entry');
-    this.sessionbean.changeAsyncJobStatus(true);
+    this.changeAsyncJobStatus(true);
     this.eksiciService.getEntry(pEntryId).subscribe(
       data => this.sessionbean.currentTopic = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed and entry loaded..");
-        this.sessionbean.changeAsyncJobStatus(false);
+        this.changeAsyncJobStatus(false);
       }
 
     );
@@ -117,13 +151,13 @@ export class EksiSharedService {
 
   loadSuser(pSuserNick: String) {
     console.log('loading suser');
-    this.sessionbean.changeAsyncJobStatus(true);
+    this.changeAsyncJobStatus(true);
     this.eksiciService.getSuser(pSuserNick).subscribe(
       data => this.sessionbean.suser = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed and suser loaded.." + this.sessionbean.suser.nick);
-        this.sessionbean.changeAsyncJobStatus(false);
+        this.changeAsyncJobStatus(false);
         this.isCollapsed=true;
         this.loadSuserEntryStats(pSuserNick, "son-entryleri",1);
         console.log('suser entry stats:' + pSuserNick);
@@ -135,14 +169,20 @@ export class EksiSharedService {
 
   login(pEmail: String, pPassword: String) {
     console.log('loading entry');
-    this.sessionbean.changeAsyncJobStatus(true);
+    this.changeAsyncJobStatus(true);
     this.eksiciService.login(pEmail,pPassword).subscribe(
       data => this.sessionbean.loginSuser = data,
       error => this.sessionbean.errorMessage = <any>error,
       () => {
         console.log("the subscription is completed login." + this.sessionbean.loginSuser.sozlukToken);
-        console.log("Err Mesaj: " + this.sessionbean.errorMessage);
-        this.sessionbean.changeAsyncJobStatus(false);
+        
+        this.changeAsyncJobStatus(false);
+        if(this.sessionbean.loginSuser.sozlukToken != null){
+          console.log('token alindi:' + this.sessionbean.loginSuser.sozlukToken);
+          this.router.navigate([this.getSuserRouterLink(this.sessionbean.loginSuser.suserInfo.nick)]);
+        }else{
+          console.log('giris basarisiz..');
+        }
       }
 
     );

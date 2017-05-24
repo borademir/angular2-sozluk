@@ -9,7 +9,7 @@ import 'rxjs/add/operator/catch';
 @Component({
   selector: 'eksi-menubar',
   templateUrl: '../view/menubar.html',
-  providers: [EksiciService]
+  providers: []
 })
 export class EksiMenuBarComponent {
 

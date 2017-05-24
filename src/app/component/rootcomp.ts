@@ -16,12 +16,11 @@ export class AppComponent implements OnInit {
     private eksiciSharedService : EksiSharedService) {
       if(this.eksiciSharedService.sessionbean.mobile){
         this.eksiciSharedService.isCollapsed = true;
-        console.log('client width is smaller than 800');
       }
   }
 
     ngOnInit(): void {
-     console.log('init calisti');
+     console.log('AppComponent.ngOnIniti');
     }
 
   title = 'app works!';

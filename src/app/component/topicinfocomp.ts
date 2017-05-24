@@ -129,22 +129,22 @@ export class TopicInfoComponent {
     navigationInterceptor(event: RouterEvent): void {
         if (event instanceof NavigationStart) {
             console.log('loading true');
-            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(true);
-            document.getElementById('waitingDialogOpenerButton').click();
+            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(true);
+            this.eksiciSharedService.showWaitingDialog();
         }
         if (event instanceof NavigationEnd) {
-            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(false);
-            document.getElementById('waitingDialogCloserButton').click();
+            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
+            this.eksiciSharedService.hideWaitingDialog();
         }
 
         // Set loading state to false in both of the below events to hide the spinner in case a request fails
         if (event instanceof NavigationCancel) {
-            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(false);
-            document.getElementById('waitingDialogCloserButton').click();
+            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
+            this.eksiciSharedService.hideWaitingDialog();
         }
         if (event instanceof NavigationError) {
-            this.eksiciSharedService.sessionbean.changeLoadingStatusFromNavigationLifeCycle(false);
-            document.getElementById('waitingDialogCloserButton').click();
+            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
+            this.eksiciSharedService.hideWaitingDialog();
         }
     }
 

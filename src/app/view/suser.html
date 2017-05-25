@@ -76,6 +76,11 @@
                                     <div [ngClass]="{'panel' : true , 'panel-primary': i%3==0 , 'panel-green': i%3==1 , 'panel-yellow': i%3==2}" [id]="entry.entryId">
                                         <div class="panel-heading">
                                             <div class="panel-title">
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                <a [routerLink]=[eksiciSharedService.getSuserRouterLink(entry.suser.nick)] routerLinkActive="active">
+                                                    {{entry.suser.nick}}
+                                                </a>
+                                                <br/>
                                                 <i class="fa fa-comments-o" aria-hidden="true"></i>
                                                 <a [routerLink]=[eksiciSharedService.getEntryRouterLink(topic.originalUrl),{tim:eksiciSharedService.timeInMiliseconds}] routerLinkActive="active">
                                                     {{topic.topicText}}

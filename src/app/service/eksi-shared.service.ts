@@ -166,6 +166,26 @@ export class EksiSharedService {
     );
   }
 
+  loadMessages() {
+    console.log('loading messages');
+    this.changeAsyncJobStatus(true);
+    this.eksiciService.getMessages().subscribe(
+      data => this.sessionbean.loginSuser = data,
+      error => this.sessionbean.errorMessage = <any>error,
+      () => {
+        console.log("the subscription is completed messages." + this.sessionbean.loginSuser.sozlukToken);
+        
+        this.changeAsyncJobStatus(false);
+        if(this.sessionbean.loginSuser.sozlukToken != null){
+          this.sessionManagementService.addSozlukToken(this.sessionbean.loginSuser.sozlukToken);
+        }else{
+          console.log('giris basarisiz..');
+        }
+      }
+
+    );
+  }
+
   logout() {
     this.showWaitingDialog();
     this.sessionManagementService.removeSozlukToken();

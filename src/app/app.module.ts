@@ -11,6 +11,7 @@ import { EksiMenuBarComponent}      from './component/menubarcomp';
 import { TopicListComponent}        from './component/topiclistcomp';
 import { TopicInfoComponent}        from './component/topicinfocomp';
 import { SuserComponent}            from './component/susercomp';
+import { MessagesComponent}         from './component/messagescomp';
 import { LoginComponent}            from './component/logincomp';
 import { EksiSharedService }        from './service/eksi-shared.service';
 import { EksiciService }            from './service/eksici-http-service';
@@ -45,6 +46,14 @@ import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
   };
 
 const appRoutes: Routes = [
+  
+  { 
+    path: 'messages'          , 
+    component: MessagesComponent ,
+    data: {
+      type:  'messages'
+    }
+  },
   { 
     path: 'login'          , 
     component: LoginComponent ,
@@ -135,7 +144,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   declarations: [
-    AppComponent,EksiMenuBarComponent,TopicInfoComponent, TopicListComponent , SuserComponent, LoginComponent
+    AppComponent,EksiMenuBarComponent,TopicInfoComponent, TopicListComponent , SuserComponent, LoginComponent , MessagesComponent
   ],
   imports: [
     BrowserModule,
@@ -161,7 +170,7 @@ const appRoutes: Routes = [
     },
     {
       provide: EksiciHttpImplService,
-      useFactory: (backend: XHRBackend, options: RequestOptions) => {
+      useFactory: (backend: XHRBackend, options: RequestOptions ) => {
         return new EksiciHttpImplService(backend, options);
       },
       deps: [XHRBackend, RequestOptions]

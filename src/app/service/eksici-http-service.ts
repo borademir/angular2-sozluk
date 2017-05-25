@@ -74,6 +74,17 @@ export class EksiciService {
     return resp;
   }
 
+  getMessages (): Observable<LoginSuser> {
+    let resp: Observable<LoginSuser> = this.http.get(environment.apiBaseUrl + 'messages')
+                    .map((response: Response) => //{
+                      //console.log('map in:' + JSON.stringify(response.json()));
+                      <LoginSuser>response.json()
+                    //}
+                    )
+                    .catch(this.handleError);    
+    return resp;
+  }
+
   loginWithToken (pToken: String): Observable<LoginSuser> {
     let resp: Observable<LoginSuser> = this.http.get(environment.apiBaseUrl + 'login/' + pToken)
                     .map((response: Response) => <LoginSuser>response.json())

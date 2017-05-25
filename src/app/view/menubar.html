@@ -17,12 +17,17 @@
                 </li>
             </template>
             <li class="divider dropdown-divider"></li>
+            <li><a routerLink="/videos" routerLinkActive="active">videolar</a></li>
             <li role="menuitem"><a class="dropdown-item" routerLink="/deserted" routerLinkActive="active">başıboşlar</a></li>
         </ul>
     </li>
-    <li><a routerLink="/videos" routerLinkActive="active">videolar</a></li>
+    
     <li *ngIf="eksiciSharedService.sessionbean.loginSuser.suserInfo.nick == null"><a routerLink="/login" routerLinkActive="active">giriş</a></li>
-
+    <li>
+        <a *ngIf="eksiciSharedService.sessionbean.loginSuser.suserInfo.nick != null" routerLink="/messages" routerLinkActive="active">
+            <i class="fa fa-bell"></i>
+        </a>
+    </li>
     <li dropdown *ngIf="eksiciSharedService.sessionbean.loginSuser.suserInfo.nick != null"> 
         <a dropdownToggle data-toggle="dropdown" href="#">
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>

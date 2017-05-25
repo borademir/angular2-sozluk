@@ -1,5 +1,5 @@
 import { Injectable }              from '@angular/core';
-import { Http, Response }          from '@angular/http';
+import { Response }                from '@angular/http';
 import { Observable }              from 'rxjs/Observable';
 import { Channel }                 from '../model/channel';
 import { TopicPager}               from '../model/topicpager';
@@ -8,7 +8,7 @@ import { Suser }                   from '../model/suser';
 import { LoginSuser }              from '../model/loginsuser';
 import { AutoComplete }            from '../model/autocomplete';
 import { environment }             from '../../environments/environment';
-
+import { EksiciHttpImplService }   from '../service/eksici-http-impl.service';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 
@@ -16,7 +16,7 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class EksiciService {
   
-  constructor (private http: Http) {
+  constructor (private http: EksiciHttpImplService) {
     console.log('EksiciService constructor');
   }
 

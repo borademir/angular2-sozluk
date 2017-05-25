@@ -1,11 +1,12 @@
-import { Injectable }     from '@angular/core';
-import { SessionBean }    from '../bean/sessionbean';
-import { Subject }        from 'rxjs/Subject';
-import { EksiciService }  from '../service/eksici-http-service';
-import { SessionManagementService }  from '../service/session-management.service';
-import { Topic }          from '../model/topic';
-import { Channel }        from '../model/channel';
-import { LoginSuser }     from '../model/loginsuser';
+import { Injectable }               from '@angular/core';
+import { SessionBean }              from '../bean/sessionbean';
+import { Subject }                  from 'rxjs/Subject';
+import { EksiciService }            from '../service/eksici-http-service';
+import { SessionManagementService } from '../service/session-management.service';
+import { Topic }                    from '../model/topic';
+import { Channel }                  from '../model/channel';
+import { LoginSuser }               from '../model/loginsuser';
+
 import { Router, ActivatedRoute, Params, Data , NavigationEnd , Event as RouterEvent, NavigationStart,NavigationCancel, NavigationError } from '@angular/router';
 
 @Injectable()

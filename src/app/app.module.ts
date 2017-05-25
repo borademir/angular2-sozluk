@@ -1,25 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { BrowserModule }            from '@angular/platform-browser';
+import { NgModule }                 from '@angular/core';
+import { FormsModule }              from '@angular/forms';
 import { HttpModule , JsonpModule } from '@angular/http';
+import { RequestOptions,XHRBackend} from '@angular/http';
+import { NgbModule}                 from '@ng-bootstrap/ng-bootstrap';
+import { DropdownModule }           from 'ng2-bootstrap';
+import { AppComponent }             from './component/rootcomp';
 
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { DropdownModule } from 'ng2-bootstrap';
-
-import { AppComponent } from './component/rootcomp';
-import { EksiMenuBarComponent} from './component/menubarcomp';
-import { TopicListComponent} from './component/topiclistcomp';
-import { TopicInfoComponent} from './component/topicinfocomp';
-import { SuserComponent} from './component/susercomp';
-import { LoginComponent} from './component/logincomp';
-import { EksiSharedService } from './service/eksi-shared.service';
-import { EksiciService } from './service/eksici-http-service';
+import { EksiMenuBarComponent}      from './component/menubarcomp';
+import { TopicListComponent}        from './component/topiclistcomp';
+import { TopicInfoComponent}        from './component/topicinfocomp';
+import { SuserComponent}            from './component/susercomp';
+import { LoginComponent}            from './component/logincomp';
+import { EksiSharedService }        from './service/eksi-shared.service';
+import { EksiciService }            from './service/eksici-http-service';
+import { EksiciHttpImplService }    from './service/eksici-http-impl.service';
 import { SessionManagementService } from './service/session-management.service';
-import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
-import { RouterModule, Routes } from '@angular/router';
-import { ModalModule } from 'ngx-bootstrap/modal';
-import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
-//import { SharedModule } from './shared.module'
+
+import { ProgressbarModule }        from 'ngx-bootstrap/progressbar';
+import { RouterModule, Routes }     from '@angular/router';
+import { ModalModule }              from 'ngx-bootstrap/modal';
+import { ResponsiveConfig }         from 'ng2-responsive'
+import { ResponsiveModule }         from 'ng2-responsive'
+
 import { CollapseModule } from 'ng2-bootstrap'
 
 
@@ -155,6 +158,13 @@ const appRoutes: Routes = [
     {
      provide: ResponsiveConfig, 
      useFactory: ResponsiveDefinition 
+    },
+    {
+      provide: EksiciHttpImplService,
+      useFactory: (backend: XHRBackend, options: RequestOptions) => {
+        return new EksiciHttpImplService(backend, options);
+      },
+      deps: [XHRBackend, RequestOptions]
     }
   ],
   bootstrap: [AppComponent]

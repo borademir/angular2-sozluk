@@ -23,7 +23,6 @@ export class TopicInfoComponent {
     private route: ActivatedRoute,
     private router: Router
   ) {
-    console.log(route);
     router.events.subscribe((event: RouterEvent) => {
         if(event.url.indexOf('topic/entries') < 0){
           console.log('event.url from leftside:' + event.url);
@@ -45,7 +44,7 @@ export class TopicInfoComponent {
             return;
         }
         this.eksiciSharedService.sessionbean.clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        console.log('scrolling to top width client width :' + this.eksiciSharedService.sessionbean.clientWidth);
+        //console.log('scrolling to top width client width :' + this.eksiciSharedService.sessionbean.clientWidth);
         //this.eksiciSharedService.sessionbean.topicsTypeDescription = 'w:' + this.eksiciSharedService.sessionbean.clientWidth;
         document.body.scrollTop = 0;
     });
@@ -114,42 +113,37 @@ export class TopicInfoComponent {
   }
 
   openTopicEntries(pHref: String) {
-    console.log(pHref + ' true1..');
     this.eksiciSharedService.loadTopicEntriesAsync(pHref);
     this.eksiciSharedService.isCollapsed=true;
   }
 
   openEntry(pEntryId: String) {
-    console.log(pEntryId + ' true2..');
     this.eksiciSharedService.loadEntry(pEntryId);
     this.eksiciSharedService.isCollapsed=true;
   }
 
-    // Shows and hides the loading spinner during RouterEvent changes
-    navigationInterceptor(event: RouterEvent): void {
-        if (event instanceof NavigationStart) {
-            console.log('loading true');
-            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(true);
-            this.eksiciSharedService.showWaitingDialog();
-        }
-        if (event instanceof NavigationEnd) {
-            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
-            this.eksiciSharedService.hideWaitingDialog();
-        }
+  navigationInterceptor(event: RouterEvent): void {
+      if (event instanceof NavigationStart) {
+          this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(true);
+          this.eksiciSharedService.showWaitingDialog();
+      }
+      if (event instanceof NavigationEnd) {
+          this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
+          this.eksiciSharedService.hideWaitingDialog();
+      }
 
-        // Set loading state to false in both of the below events to hide the spinner in case a request fails
-        if (event instanceof NavigationCancel) {
-            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
-            this.eksiciSharedService.hideWaitingDialog();
-        }
-        if (event instanceof NavigationError) {
-            this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
-            this.eksiciSharedService.hideWaitingDialog();
-        }
-    }
+      // Set loading state to false in both of the below events to hide the spinner in case a request fails
+      if (event instanceof NavigationCancel) {
+          this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
+          this.eksiciSharedService.hideWaitingDialog();
+      }
+      if (event instanceof NavigationError) {
+          this.eksiciSharedService.changeLoadingStatusFromNavigationLifeCycle(false);
+          this.eksiciSharedService.hideWaitingDialog();
+      }
+  }
 
   refresh(event) {
-     console.log('sacma sapan click');
      location.reload();
   }
 

@@ -34,7 +34,7 @@ export class SuserComponent {
             return;
         }
         this.eksiciSharedService.sessionbean.clientWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
-        console.log('scrolling to top width from susercomp client width :' + this.eksiciSharedService.sessionbean.clientWidth);
+        //console.log('scrolling to top width from susercomp client width :' + this.eksiciSharedService.sessionbean.clientWidth);
         document.body.scrollTop = 0;
     });
     

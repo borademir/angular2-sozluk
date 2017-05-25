@@ -14,12 +14,14 @@ import { SuserComponent} from './component/susercomp';
 import { LoginComponent} from './component/logincomp';
 import { EksiSharedService } from './service/eksi-shared.service';
 import { EksiciService } from './service/eksici-http-service';
+import { SessionManagementService } from './service/session-management.service';
 import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { ResponsiveModule , ResponsiveConfig } from 'ng2-responsive'
 //import { SharedModule } from './shared.module'
-import { CollapseModule } from 'ng2-bootstrap/ng2-bootstrap'
+import { CollapseModule } from 'ng2-bootstrap'
+
 
 // RECOMMENDED (doesn't work with system.js)
 import { TypeaheadModule } from 'ngx-bootstrap/typeahead';
@@ -149,6 +151,7 @@ const appRoutes: Routes = [
   providers: [
     EksiSharedService,
     EksiciService,
+    SessionManagementService,
     {
      provide: ResponsiveConfig, 
      useFactory: ResponsiveDefinition 
@@ -157,8 +160,13 @@ const appRoutes: Routes = [
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor (){
-    console.log('AppModule constructor');
+  constructor (eksiSharedService: EksiSharedService, sessionManagementService: SessionManagementService){
+    console.log('AppModule constructor init');
+    let token = sessionManagementService.getSozlukToken();
+    console.log('AppModule constructor, token:' + token);
+    if(token != null){
+      eksiSharedService.loginWithToken(token);
+    }
   }
 
 }

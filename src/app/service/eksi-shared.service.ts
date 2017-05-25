@@ -2,31 +2,26 @@ import { Injectable }     from '@angular/core';
 import { SessionBean }    from '../bean/sessionbean';
 import { Subject }        from 'rxjs/Subject';
 import { EksiciService }  from '../service/eksici-http-service';
+import { SessionManagementService }  from '../service/session-management.service';
 import { Topic }          from '../model/topic';
 import { Channel }        from '../model/channel';
-import { LoginSuser }        from '../model/loginsuser';
+import { LoginSuser }     from '../model/loginsuser';
 import { Router, ActivatedRoute, Params, Data , NavigationEnd , Event as RouterEvent, NavigationStart,NavigationCancel, NavigationError } from '@angular/router';
 
 @Injectable()
 export class EksiSharedService {
 
-  private storageSession: SessionBean = new SessionBean();
+  public sessionbean: SessionBean = new SessionBean();
   public isCollapsed: boolean = false;
 
   constructor(
     private eksiciService: EksiciService,
-    private router: Router
+    private router: Router,
+    private sessionManagementService: SessionManagementService
   ) {
-    console.log('EksiSharedService constructor');
+    console.log('EksiSharedService constructor ');
   }
 
-  get sessionbean(): SessionBean{
-    if(localStorage.getItem("sessionBeanItem") == null){
-      localStorage.setItem("sessionBeanItem",JSON.stringify(this.storageSession));
-    }
-    //return JSON.parse(localStorage.getItem("sessionBeanItem"));
-    return this.storageSession;
-  }
   loadPageDefaults(){
     if(this.sessionbean.topicsCurrentPage.contentList == null){
       this.loadTopicsAsync('topic/today','bugün');
@@ -70,11 +65,15 @@ export class EksiSharedService {
   }
 
   hideWaitingDialog() {
-    setTimeout(document.getElementById('waitingDialogCloserButton').click(),1000);
+    if(document.getElementById('waitingDialogCloserButton') != null){
+      setTimeout(document.getElementById('waitingDialogCloserButton').click(),1000);
+    }
   }
 
   showWaitingDialog() {
-    document.getElementById('waitingDialogOpenerButton').click();
+    if(document.getElementById('waitingDialogOpenerButton') != null){
+      document.getElementById('waitingDialogOpenerButton').click();
+    }
   }
 
     changeAsyncJobStatus(pStatus: boolean){
@@ -166,9 +165,14 @@ export class EksiSharedService {
     );
   }
 
-
+  logout() {
+    this.showWaitingDialog();
+    this.sessionManagementService.removeSozlukToken();
+    this.sessionbean.loginSuser = new LoginSuser();
+    this.hideWaitingDialog();
+  }
   login(pEmail: String, pPassword: String) {
-    console.log('loading entry');
+    console.log('loading login');
     this.changeAsyncJobStatus(true);
     this.eksiciService.login(pEmail,pPassword).subscribe(
       data => this.sessionbean.loginSuser = data,
@@ -178,10 +182,32 @@ export class EksiSharedService {
         
         this.changeAsyncJobStatus(false);
         if(this.sessionbean.loginSuser.sozlukToken != null){
-          console.log('token alindi:' + this.sessionbean.loginSuser.sozlukToken);
+          this.sessionManagementService.addSozlukToken(this.sessionbean.loginSuser.sozlukToken);
           this.router.navigate([this.getSuserRouterLink(this.sessionbean.loginSuser.suserInfo.nick)]);
         }else{
           console.log('giris basarisiz..');
+        }
+      }
+
+    );
+  }
+
+  loginWithToken(pToken) {
+    console.log('loading login with token');
+    this.changeAsyncJobStatus(true);
+    this.eksiciService.loginWithToken(pToken).subscribe(
+      data => this.sessionbean.loginSuser = data,
+      error => this.sessionbean.errorMessage = <any>error,
+      () => {
+        console.log("the subscription is completed auto login." + this.sessionbean.loginSuser.sozlukToken);
+        
+        this.changeAsyncJobStatus(false);
+        if(this.sessionbean.loginSuser.sozlukToken != null){
+          this.sessionManagementService.addSozlukToken(this.sessionbean.loginSuser.sozlukToken);
+          console.log('auto token alindi:' + this.sessionManagementService.getSozlukToken());
+        }else{
+          console.log('auto giris basarisiz..');
+          this.sessionManagementService.removeSozlukToken();
         }
       }
 

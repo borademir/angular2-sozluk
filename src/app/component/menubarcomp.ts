@@ -27,7 +27,7 @@ export class EksiMenuBarComponent {
       data => this.eksiciSharedService.sessionbean.channels = data,
       error => this.errorMessage = <any>error,
       () => {
-        console.log("the subscription is completed and channels loaded.." + this.eksiciSharedService.sessionbean.channels);
+        console.log("the subscription is completed and channels loaded..");
       }
 
     );

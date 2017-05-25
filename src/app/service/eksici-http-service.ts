@@ -74,6 +74,14 @@ export class EksiciService {
     return resp;
   }
 
+  loginWithToken (pToken: String): Observable<LoginSuser> {
+    let resp: Observable<LoginSuser> = this.http.get(environment.apiBaseUrl + 'login/' + pToken)
+                    .map((response: Response) => <LoginSuser>response.json())
+                    .catch(this.handleError);    
+    return resp;
+  }
+  
+
   getSuser (pSuserNick: String): Observable<Suser> {
     let resp: Observable<Suser> = this.http.get(environment.apiBaseUrl + 'suser/' + pSuserNick)
                     .map((response: Response) => <Suser>response.json())

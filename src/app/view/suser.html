@@ -48,10 +48,10 @@
                             </a>                       
                         </li>
                         <li dropdown role="presentation" [ngClass]="{'active' : eksiciSharedService.sessionbean.suser.activeTabIndex == 2 }"> 
-                            <a dropdownToggle data-toggle="dropdown" href="#">
+                            <a dropdownToggle (click)="false">
                                 istatistikler <i class="fa fa-caret-down"></i>
                             </a>
-                            <ul class="dropdown-menu dropdown-user" dropdownMenu>
+                            <ul class="dropdown-menu dropdown-user" *dropdownMenu>
                                 <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'en-cok-favorilenen-entryleri',2)"><i class="fa fa-star fa-fw"></i>en çok favorilenenler</a></li>
                                 <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'son-oylananlari',2)"><i class="fa fa-user fa-fw"></i>son oylananları</a></li>
                                 <li><a (click)="eksiciSharedService.loadSuserEntryStats(eksiciSharedService.sessionbean.suser.nick,'bu-hafta-dikkat-cekenleri',2)"><i class="fa fa-user fa-fw"></i>bu hafta dikkat çekenleri</a></li>

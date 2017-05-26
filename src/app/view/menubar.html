@@ -9,8 +9,9 @@
         </li>
     </template>
 
-    <li dropdown><a href="#" dropdownToggle>...</a>
-        <ul dropdownMenu role="menu" aria-labelledby="single-button">
+    <li dropdown role="presentation">
+        <a href="#" dropdownToggle (click)="false">...</a>
+        <ul *dropdownMenu role="menu" aria-labelledby="single-button">
             <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
                 <li *ngIf="i>eksiciSharedService.sessionbean.channelOffset-1">
                     <a [routerLink]="[getChannellRouterLink(channel)]" routerLinkActive="active">{{channel.name}}</a>
@@ -29,10 +30,10 @@
         </a>
     </li>
     <li dropdown *ngIf="eksiciSharedService.sessionbean.loginSuser.suserInfo.nick != null"> 
-        <a dropdownToggle data-toggle="dropdown" href="#">
+        <a dropdownToggle (click)="false" >
             <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
         </a>
-        <ul class="dropdown-menu dropdown-user" dropdownMenu>
+        <ul class="dropdown-menu dropdown-user" *dropdownMenu>
             <li >
                 <a [routerLink]=[eksiciSharedService.getSuserRouterLink(eksiciSharedService.sessionbean.loginSuser.suserInfo.nick)] routerLinkActive="active">
                     <i class="fa fa-user fa-fw"></i> ben({{eksiciSharedService.sessionbean.loginSuser.suserInfo.nick}})

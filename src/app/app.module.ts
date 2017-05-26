@@ -3,8 +3,8 @@ import { NgModule }                 from '@angular/core';
 import { FormsModule }              from '@angular/forms';
 import { HttpModule , JsonpModule } from '@angular/http';
 import { RequestOptions,XHRBackend} from '@angular/http';
-import { NgbModule}                 from '@ng-bootstrap/ng-bootstrap';
-import { DropdownModule }           from 'ng2-bootstrap';
+
+
 import { AppComponent }             from './component/rootcomp';
 
 import { EksiMenuBarComponent}      from './component/menubarcomp';
@@ -21,10 +21,11 @@ import { SessionManagementService } from './service/session-management.service';
 import { ProgressbarModule }        from 'ngx-bootstrap/progressbar';
 import { RouterModule, Routes }     from '@angular/router';
 import { ModalModule }              from 'ngx-bootstrap/modal';
+import { BsDropdownModule, CollapseModule }              from 'ngx-bootstrap';
 import { ResponsiveConfig }         from 'ng2-responsive'
 import { ResponsiveModule }         from 'ng2-responsive'
 
-import { CollapseModule } from 'ng2-bootstrap'
+
 
 
 // RECOMMENDED (doesn't work with system.js)
@@ -151,8 +152,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpModule,
     JsonpModule,
-    NgbModule.forRoot(),
-    DropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     ResponsiveModule,
     TypeaheadModule.forRoot(),
@@ -170,9 +170,7 @@ const appRoutes: Routes = [
     },
     {
       provide: EksiciHttpImplService,
-      useFactory: (backend: XHRBackend, options: RequestOptions ) => {
-        return new EksiciHttpImplService(backend, options);
-      },
+      useFactory: eksiciHttpFunctionFactory,
       deps: [XHRBackend, RequestOptions]
     }
   ],
@@ -188,4 +186,8 @@ export class AppModule {
     }
   }
 
+}
+
+export function eksiciHttpFunctionFactory(backend: XHRBackend, options: RequestOptions ){
+  return new EksiciHttpImplService(backend, options);
 }

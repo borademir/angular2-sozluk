@@ -179,7 +179,7 @@ export class EksiSharedService {
         if(this.sessionbean.loginSuser.sozlukToken != null){
           this.sessionManagementService.addSozlukToken(this.sessionbean.loginSuser.sozlukToken);
         }else{
-          console.log('giris basarisiz..');
+          console.log('messages basarisiz..');
         }
       }
 

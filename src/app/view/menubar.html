@@ -9,9 +9,11 @@
         </li>
     </template>
 
-    <li dropdown role="presentation">
-        <a href="#" dropdownToggle (click)="false">...</a>
-        <ul *dropdownMenu role="menu" aria-labelledby="single-button">
+    <li dropdown role="presentation" [ngClass]="{'active' : true }"> 
+        <a dropdownToggle (click)="false">
+            <i class="fa fa-hashtag" aria-hidden="true"></i>kanallar
+        </a>
+        <ul class="dropdown-menu dropdown-user" *dropdownMenu>
             <template ngFor let-i="index" let-c="count" let-channel [ngForOf]="eksiciSharedService.sessionbean.channels">
                 <li *ngIf="i>eksiciSharedService.sessionbean.channelOffset-1">
                     <a [routerLink]="[getChannellRouterLink(channel)]" routerLinkActive="active">{{channel.name}}</a>

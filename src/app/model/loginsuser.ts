@@ -1,13 +1,13 @@
-import {EksiBaseModel} from '../model/eksibase';
+import {Conversation} from '../model/conversation';
 import {Suser}         from '../model/suser';
 
-export class LoginSuser extends EksiBaseModel {
+export class LoginSuser  {
     
-    sozlukToken     : string  = null;
-    suserInfo       : Suser   = new Suser() ;
-
+    sozlukToken         : string  = null;
+    suserInfo           : Suser   = new Suser() ;
+    conversationList    : Conversation[] = null;
+    
     constructor(values: Object = {}){
-        super();
         Object.assign(this,values);
     }
 

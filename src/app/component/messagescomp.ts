@@ -53,7 +53,7 @@ export class MessagesComponent {
 
 
     this.eksiciSharedService.loadMessages();
-    this.eksiciSharedService.isCollapsed=false;
+    this.eksiciSharedService.isCollapsed=true;
 
     /*if(this.route.snapshot.data['type']){
         if(this.route.snapshot.data['type'] == 'suser'){

@@ -106,18 +106,19 @@ export class EksiciService {
     return body.data ;
   }
   private handleError (error: Response | any) {
-    console.log('handle error start');
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      console.log('Response error:' + JSON.stringify(body));
-      const err = body.message || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-      console.log('else error');
+    let errMsg: string;    
+    try {
+      if (error instanceof Response) {
+          const body = error.json();
+          const err = body.message || JSON.stringify(body);
+          errMsg = body.message;
+      } else {
+        errMsg = error.message ? error.message : error.toString();
+      }
     }
-    console.error('HTTP Service : ' + errMsg);
+    catch (e){
+      return Observable.throw("beklenmeyen isler");
+    }
     return Observable.throw(errMsg);
   }
 }

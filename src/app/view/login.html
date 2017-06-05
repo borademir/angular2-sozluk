@@ -5,6 +5,9 @@
 
                 <div class="container">
                     <h1>sözlük girişi</h1>
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                        <strong>{{errorMessage}}</strong>
+                    </div>
                     <form #loginForm="ngForm" novalidate="novalidate" (ngSubmit)="onSubmit()" >
                     <div class="form-group">
                         <label for="email">e-mail adresi</label>

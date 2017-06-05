@@ -24,8 +24,10 @@ export class EksiSharedService {
   }
 
   loadPageDefaults(){
+    console.log('loadPageDefaults started.');
     if(this.sessionbean.topicsCurrentPage.contentList == null){
       this.loadTopicsAsync('topic/today','bugün');
+      console.log('loadPageDefaults todays.');
     }
 
     if(this.sessionbean.currentTopic == null || this.sessionbean.currentTopic.entryList == null){
@@ -34,36 +36,6 @@ export class EksiSharedService {
     }
   }
 
-  loadTopicsAsync(ptopicsType: String, pTopicsTypeDescription: String) {
-    //this.sessionbean.lastTopicTypeUrl = ptopicsType;
-    console.log('loading topics');
-    this.changeAsyncJobStatus(true);
-    this.eksiciService.getTopics(ptopicsType).subscribe(
-      data => this.sessionbean.topicsCurrentPage = data,
-      error => this.sessionbean.errorMessage = <any>error,
-      () => {
-        console.log("the subscription is completed topics loaded..");
-        this.sessionbean.topicsTypeDescription = pTopicsTypeDescription;
-        this.changeAsyncJobStatus(false);
-      }
-
-    );
-  }
-
-  loadSuserEntryStats(pSuserNick: String , pEntryStatType: String, pActiveTabIndex: number) {    
-    console.log('loading entry stats');
-    this.changeAsyncJobStatus(true);
-    this.eksiciService.getSuserEntryStats(pSuserNick,pEntryStatType).subscribe(
-      data => this.sessionbean.suser.currentEntryStats = data,
-      error => this.sessionbean.errorMessage = <any>error,
-      () => {
-        console.log("the subscription is completed entry stats loaded..");
-        this.changeAsyncJobStatus(false);
-        this.sessionbean.suser.activeTabIndex = pActiveTabIndex;
-      }
-
-    );
-  }
 
   hideWaitingDialog() {
     if(document.getElementById('waitingDialogCloserButton') != null){
@@ -77,7 +49,7 @@ export class EksiSharedService {
     }
   }
 
-    changeAsyncJobStatus(pStatus: boolean){
+  changeAsyncJobStatus(pStatus: boolean){
         if(pStatus){
           this.showWaitingDialog();
         }else{
@@ -86,7 +58,7 @@ export class EksiSharedService {
         this.sessionbean.asyncJobWorking = pStatus;        
     }
 
-    changeLoadingStatusFromNavigationLifeCycle(pStatus: boolean){
+  changeLoadingStatusFromNavigationLifeCycle(pStatus: boolean){
         if(!this.sessionbean.asyncJobWorking){
           console.log('changeLoadingStatusFromNavigationLifeCycle:' + pStatus);
           if(pStatus){
@@ -97,6 +69,42 @@ export class EksiSharedService {
         }
     }
 
+  loadTopicsAsync(ptopicsType: String, pTopicsTypeDescription: String) {
+    //this.sessionbean.lastTopicTypeUrl = ptopicsType;
+    console.log('loading topics');
+    this.changeAsyncJobStatus(true);
+    this.eksiciService.getTopics(ptopicsType).subscribe(
+      data => this.sessionbean.topicsCurrentPage = data,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
+      () => {
+        console.log("the subscription is completed topics loaded.." + this.sessionbean.topicsCurrentPage);
+        this.sessionbean.topicsTypeDescription = pTopicsTypeDescription;
+        this.changeAsyncJobStatus(false);
+      }
+
+    );
+  }
+
+  loadSuserEntryStats(pSuserNick: String , pEntryStatType: String, pActiveTabIndex: number) {    
+    console.log('loading entry stats');
+    this.changeAsyncJobStatus(true);
+    this.eksiciService.getSuserEntryStats(pSuserNick,pEntryStatType).subscribe(
+      data => this.sessionbean.suser.currentEntryStats = data,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
+      () => {
+        console.log("the subscription is completed entry stats loaded..");
+        this.changeAsyncJobStatus(false);
+        this.sessionbean.suser.activeTabIndex = pActiveTabIndex;
+      }
+
+    );
+  }
+
+
 /**
  * 
  * http://www.eksici.com/api/v1/topics/entries?topicsHref=
@@ -106,7 +114,9 @@ export class EksiSharedService {
     this.changeAsyncJobStatus(true);
     this.eksiciService.getTopicEntries(pHref).subscribe(
       data => this.sessionbean.currentTopic = data,
-      error => this.sessionbean.errorMessage = <any>error,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
       () => {
         console.log("the subscription is completed and current topic loaded..");
         this.sessionbean.currentTopic.pageNumberlist = Array(this.sessionbean.currentTopic.totalEntryPage);
@@ -130,7 +140,9 @@ export class EksiSharedService {
     this.changeAsyncJobStatus(true);
     this.eksiciService.getEntry(pEntryId).subscribe(
       data => this.sessionbean.currentTopic = data,
-      error => this.sessionbean.errorMessage = <any>error,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
       () => {
         console.log("the subscription is completed and entry loaded..");
         this.changeAsyncJobStatus(false);
@@ -154,7 +166,9 @@ export class EksiSharedService {
     this.changeAsyncJobStatus(true);
     this.eksiciService.getSuser(pSuserNick).subscribe(
       data => this.sessionbean.suser = data,
-      error => this.sessionbean.errorMessage = <any>error,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
       () => {
         console.log("the subscription is completed and suser loaded.." + this.sessionbean.suser.nick);
         this.changeAsyncJobStatus(false);
@@ -171,7 +185,9 @@ export class EksiSharedService {
     this.changeAsyncJobStatus(true);
     this.eksiciService.getMessages().subscribe(
       data => this.sessionbean.loginSuser = data,
-      error => this.sessionbean.errorMessage = <any>error,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
       () => {
         console.log("the subscription is completed messages." + this.sessionbean.loginSuser.sozlukToken);
         
@@ -186,39 +202,14 @@ export class EksiSharedService {
     );
   }
 
-  logout() {
-    this.showWaitingDialog();
-    this.sessionManagementService.removeSozlukToken();
-    this.sessionbean.loginSuser = new LoginSuser();
-    this.hideWaitingDialog();
-  }
-  login(pEmail: String, pPassword: String) {
-    console.log('loading login');
-    this.changeAsyncJobStatus(true);
-    this.eksiciService.login(pEmail,pPassword).subscribe(
-      data => this.sessionbean.loginSuser = data,
-      error => this.sessionbean.errorMessage = <any>error,
-      () => {
-        console.log("the subscription is completed login." + this.sessionbean.loginSuser.sozlukToken);
-        
-        this.changeAsyncJobStatus(false);
-        if(this.sessionbean.loginSuser.sozlukToken != null){
-          this.sessionManagementService.addSozlukToken(this.sessionbean.loginSuser.sozlukToken);
-          this.router.navigate([this.getSuserRouterLink(this.sessionbean.loginSuser.suserInfo.nick)]);
-        }else{
-          console.log('giris basarisiz..');
-        }
-      }
-
-    );
-  }
-
   loginWithToken(pToken) {
     console.log('loading login with token');
     this.changeAsyncJobStatus(true);
     this.eksiciService.loginWithToken(pToken).subscribe(
       data => this.sessionbean.loginSuser = data,
-      error => this.sessionbean.errorMessage = <any>error,
+      error => {
+        this.changeAsyncJobStatus(false);
+      },
       () => {
         console.log("the subscription is completed auto login." + this.sessionbean.loginSuser.sozlukToken);
         
@@ -233,6 +224,13 @@ export class EksiSharedService {
       }
 
     );
+  }
+
+  logout() {
+    this.showWaitingDialog();
+    this.sessionManagementService.removeSozlukToken();
+    this.sessionbean.loginSuser = new LoginSuser();
+    this.hideWaitingDialog();
   }
   getEntryRouterLink(pTopicHref: String){
    let routerLink = "/topic/entries/"+pTopicHref;
